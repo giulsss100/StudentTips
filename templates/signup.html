@@ -1,0 +1,92 @@
+<!-- In flask we have:
+variables are defined with { {  } }
+logic is defined with { % logic % } and { % endlogic % } JINJA TEMPLATE
+
+EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
+-->
+{% extends "base_template.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block head %}
+    <!-- In Login and Sign up we don't have the menu on top  -->
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="{{ url_for('static',  filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="shortcun icon" href="{{ url_for('static', filename='images/icon.png') }}">
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',  filename='css/cover.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',  filename='css/signin.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',  filename='css/languages.css') }}" rel="stylesheet">
+
+</head>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+        <a href="/"><img src="{{ url_for('static', filename='images/studentips.png') }}" style="max-width: 30%; margin: 0"></a>
+      <form class="form-signin">
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <label for="inputFirstName" class="sr-only">First name</label>
+              <input type="text" id="inputFirstName" class="form-control" placeholder="First name" required autofocus>
+          </div>
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <label for="inputLastName" class="sr-only">Last name</label>
+              <input type="text" id="inputLastName" class="form-control" placeholder="Last name" required>
+          </div>
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-education"></span></span>
+              <label for="inputUniversity" class="sr-only">University</label>
+              <input type="text" id="inputUniversity" class="form-control" placeholder="University" required>
+          </div>
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-education"></span></span>
+              <label for="inputFaculty" class="sr-only">Faculty</label>
+              <input type="text" id="inputFaculty" class="form-control" placeholder="Faculty (optional)">
+          </div>
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+              <label for="inputPhone" class="sr-only">Phone number</label>
+              <input type="text" id="inputPhone" class="form-control" placeholder="Phone number (optional)">
+          </div>
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+              <label for="inputEmail" class="sr-only">Email address</label>
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+          </div>
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <label for="inputPassword" class="sr-only">Password</label>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          </div>
+          <div class="input-group">
+              <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
+              <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+          </div>
+        <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 3%">Sign Up</button>
+      </form>
+
+
+
+        By clicking <strong class="label label-success">Sign Up</strong>, you agree to the <a href="#" data-toggle="modal" data-target="#t_and_c_m">Terms and Conditions</a> set out by Studentips, including our Cookie Use.
+
+        <p>or</p>
+        <div class="fb-login-button">
+            <a href="http://www.facebook.com"><img src="{{ url_for('static',  filename='images/fb.png') }}"></a>
+        </div>
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+{% endblock %}
