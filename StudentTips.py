@@ -22,11 +22,9 @@ def login():
 def signup():
     return render_template('signup.html', title='Studentips - Signup')
 
-
-#come faccio a passare dal form all'altra pagina??
-@app.route('/formYourCourse')
-def search_course_tips():
-    return render_template('course_tips.html')
+@app.route('/course_tips')
+def course_tips():
+    return render_template('view_course_tips.html', title='Studentips - Course Tips')
 
 
 
