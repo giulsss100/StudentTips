@@ -93,7 +93,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
             </div><!-- /.col-lg-4 -->
         </div>
 
-        <form class="form-signin index" id="formYourCourse">
+        <form class="form-signin index" id="formYourCourse" action = "{{ url_for('course_tips') }}">
             <div class="input-group">
                 <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
                 <label for="inputCourse" class="sr-only">Course</label>

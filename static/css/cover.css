@@ -34,7 +34,6 @@ body {
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
-
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;
@@ -217,9 +216,9 @@ body {
     bottom: 0;
   }
 
-  .login {
+  .login, .user{
     right:10%;
-    left:10%
+    left:10%;
   }
 
   .form-signin input[type="text"] {
@@ -281,4 +280,7 @@ body {
 
 .languages{
   float:left;
+}
+.login, .user{
+  float:right;
 }
