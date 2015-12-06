@@ -29,17 +29,17 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
       <form class="form-signin" action="{{ url_for('homepage') }}" method="post">
         <div class="input-group">
               <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-              <label for="inputEmail" class="sr-only">Email address</label>
-              <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+              <label for="input_email" class="sr-only">Email address</label>
+              <input type="email" name="input_email" class="form-control" placeholder="Email address" required autofocus>
           </div>
           <div class="input-group">
               <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-              <label for="inputPassword" class="sr-only">Password</label>
-              <input type="password" name="inputPassword" class="form-control" placeholder="Password" required>
+              <label for="input_password" class="sr-only">Password</label>
+              <input type="password" name="input_password" class="form-control" placeholder="Password" required>
           </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="rememberMe"> Remember me
+            <input type="checkbox" name="remember_me"> Remember me
           </label>
         </div>
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
