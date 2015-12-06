@@ -52,7 +52,9 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
             <div class="carousel-caption">
               <h1>Welcome to Studentips.</h1>
               <p>If you're looking for tutors, tips about your university courses and material, this is the right place.</p>
-              <p><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a></p>
+                {% if not username %}
+                    <p><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a></p>
+                {% endif %}
             </div>
           </div>
         </div>
