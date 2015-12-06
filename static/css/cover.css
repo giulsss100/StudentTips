@@ -5,7 +5,8 @@
 /* Links */
 a,
 a:focus,
-a:hover {
+a:hover,
+.user{
   color: #fff;
 }
 
@@ -216,11 +217,6 @@ body {
     bottom: 0;
   }
 
-  .login, .user{
-    right:10%;
-    left:10%;
-  }
-
   .form-signin input[type="text"] {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -281,6 +277,15 @@ body {
 .languages{
   float:left;
 }
-.login, .user{
-  float:right;
+
+.btn-logout:hover{
+    text-decoration: underline;
+    color: white;
+}
+.btn-logout {
+     background:none!important;
+     border:none;
+     padding:0!important;
+     font: inherit;
+     cursor: pointer;
 }

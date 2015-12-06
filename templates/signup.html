@@ -24,7 +24,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
 {% block content %}
 
 <div class="container">
-        <a href="/"><img src="{{ url_for('static', filename='images/studentips.png') }}" style="max-width: 30%; margin: 0"></a>
+        <a href="{{ url_for('homepage') }}"><img src="{{ url_for('static', filename='images/studentips.png') }}" style="max-width: 30%; margin: 0"></a>
       <form class="form-signin">
           <div class="input-group">
               <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
