@@ -71,10 +71,9 @@ def signup():
 
 @app.route('/course_tips')
 def course_tips():
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips'))
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips', value1=1,value2=1, value3=5, value4=4, value5=5, value6=1, value7=2, value8=3, value9=4, value10=1))
     cookie_setting(response, 'user', cookie_status())
     return response
-
 
 
 if __name__ == '__main__':

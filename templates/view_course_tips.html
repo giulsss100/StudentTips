@@ -14,47 +14,295 @@
 
 <div class="container">
 
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-8"></div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-
-    {% for field in ["Quality of teaching","Professor availability","Utility of academic material","Utility of textbooks",
-    " Necessity to attend lectures","Difficulty of exam","Time availability at exam","Rapidity in receiving exam results",
-    "Participation of students during lectures", "Comprehension of course objectives"] %}
-
-        <p>{{ field }}
-            <span class="rating">
-
-                    {% for i in [5,1] %}
-
-                        {% if field.value == i  %}
-
-                        <input type="radio" class="rating-input" disabled=True checked="checked"
-                               id="rating-input-1-{{i}}" name="rating-input-1">
-                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
-                        {% else %}
-
-                        <input type="radio" class="rating-input " disabled=True
-                                id="rating-input-1-{{i}}" name="rating-input-1">
-                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
-                        {% endif %}
-
-                    {% endfor %}
-
-                </span>  </p>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8"></div>
     </div>
 
-    <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-2">
+            <p>Quality of teaching</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value1== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-1">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-1">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+         </span>
+        </div>
+     <div class="col-md-8">
 
     <p>Commenti testuali</p>
 
     </div>
+     </div>
+
+
+    <div class="row">
+        <div class="col-md-2">
+            <p>2</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value2== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-2">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-2">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+     </span>
+     </div>
+     </div>
+
+
+    <div class="row">
+        <div class="col-md-2">
+            <p>3</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value3== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-3">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-3">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+
+    <div class="row">
+        <div class="col-md-2">
+            <p>4</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value4== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-4">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-4">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+   <div class="row">
+        <div class="col-md-2">
+            <p>5</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value5== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-5">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-5">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p>6</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value6== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-6">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input=6">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+
+     <div class="row">
+        <div class="col-md-2">
+            <p>7</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value7== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-7">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-7">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-2">
+            <p>8</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value8== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-8">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-8">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-2">
+            <p>9</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value9== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-9">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-9">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-2">
+            <p>10</p>
+        </div>
+        <div class="col-md-2">
+         <span class="rating">
+
+            {% for i in [5,4,3,2,1] %}
+                {% if value10== i  %}
+
+                    <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                           id="rating-input-1-{{i}}" name="rating-input-10">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% else %}
+
+                    <input type="radio" class="rating-input " disabled="disabled"
+                           id="rating-input-1-{{i}}" name="rating-input-10">
+                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                {% endif %}
+
+            {% endfor %}
+          </span>
+        </div>
+     </div>
+
+
+    </div>
+
+
 
 </div>
 
