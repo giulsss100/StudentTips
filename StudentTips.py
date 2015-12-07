@@ -9,55 +9,71 @@ templates, instead, contains all dynamic folders
 def name of the page():
     return render.template('pageName.html',...)"""
 
-def cookie_status(response_page, response_title):
+"""Login"""
+def login_user():
+  if ('input_email' in request.form) and ('input_password' in request.form):
+        user_mail = request.form['input_email']
+        user_password = request.form['input_password']
+        # here we should include communication with DB, to check if credentials are correct
+        """user = User.query.filter_by((email=user_email) & (password=user_password)).first()"""
+        """update is_logged"""
+        # in case of correct login, we set the cookies
+        """response = make_response(render_template('index.html', title='Studentips', username=user.first_name))"""
+        return user_mail
+        #if controlli:
+        #    return ''
+  return ''
+
+
+"""Cookie management AND logout: check if cookie exists, or user logged in"""
+def cookie_status():
     #if cookie is not set
     if request.cookies.get('user') is None:
-        #check if the user has logged in
-        if ('input_email' in request.form) and ('input_password' in request.form):
-            user_mail = request.form['input_email']
-            user_password = request.form['input_password']
-            # here we should include communication with DB, to check if credentials are correct
-            """user = User.query.filter_by((email=user_email) & (password=user_password)).first()"""
-            """update is_logged"""
-            # in case of correct login, we set the cookies
-            """response = make_response(render_template('index.html', title='Studentips', username=user.first_name))"""
-            response = make_response(render_template(response_page, title=response_title, username=user_mail))
-            if 'remember_me' in request.form: #wait for HTML for signed user to check if this is correct
-                response.set_cookie('user', user_mail, 3600*24*365*99)
-            else: #cookie available for just 10 minutes
-                response.set_cookie('user', user_mail, 60*10)
-            return response
-
-        return render_template(response_page, title=response_title, username='')
+        return login_user()
 
     #otherwise cookie is already stored
     user_mail = request.cookies.get('user')
 
     #check if the user has logged out
     if('logout' in request.form):
-        response = make_response(render_template(response_page, title=response_title, username=''))
-        response.set_cookie('user', '', 0)
-        return response
+        return ''
     else:
-        return render_template(response_page, title=response_title, username=user_mail)
+        return user_mail
+
+"""Set the cookie"""
+def cookie_setting(response_page, cookie_name, cookie_value):
+    if cookie_value != '':
+        if 'remember_me' in request.form: #wait for HTML for signed user to check if this is correct
+            response_page.set_cookie(cookie_name, cookie_value, 3600*24*365*99)
+        else: #cookie available for just 10 minutes
+            response_page.set_cookie(cookie_name, cookie_value, 60*10)
+    else: #unset the cookie
+        response_page.set_cookie(cookie_name, '', 0)
 
 
 @app.route('/', methods=["POST", "GET"])
 def homepage():
-    #login and cookie management
-    return cookie_status('index.html', 'Studentips')
+    response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
+    cookie_setting(response, 'user', cookie_status())
+    return response
 
 @app.route('/login')
 def login():
-    return cookie_status('login.html', 'Studentips - Login')
+    response=make_response(render_template('login.html', username=cookie_status(), title='Studentips - Login'))
+    cookie_setting(response, 'user', cookie_status())
+    return response
 
 @app.route('/signup')
 def signup():
-    return cookie_status('signup.html', 'Studentips - Signup')
+    response=make_response(render_template('login.html', username=cookie_status(), title='Studentips - Signup'))
+    cookie_setting(response, 'user', cookie_status())
+    return response
 
 @app.route('/course_tips')
 def course_tips():
-    return cookie_status('view_course_tips.html', 'Studentips - Course Tips')
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips'))
+    cookie_setting(response, 'user', cookie_status())
+    return response
 
 
 
