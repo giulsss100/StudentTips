@@ -9,6 +9,9 @@ a:hover,
 .user{
   color: #fff;
 }
+.btn:focus {
+  outline:0!important;
+}
 
 /* Custom default button */
 .btn-default,
