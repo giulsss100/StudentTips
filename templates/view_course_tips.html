@@ -8,24 +8,25 @@
 {% block content %}
 
     <link href="{{ url_for('static',  filename='css/rating.css') }}" rel="stylesheet">
-<!--TODO: Togliere l'hoover alle stelline. impostare un parametro come valore di default che poi verrà passato dal file.py -->
+    <link href="{{ url_for('static',  filename='css/comments2.css') }}" rel="stylesheet">
 
-    <!--metto tutte le votazioni nella prima colonna a destra, i commenti nella seconda colonna (piu grande) -->
+<!--TODO: Togliere l'hoover alle stelline.  -->
+
 
 <div class="container">
 
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-2"></div>
-        <div class="col-md-8"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
     </div>
 
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <p>Quality of teaching</p>
-        </div>
-        <div class="col-md-2">
-         <span class="rating">
+            <p>
+                 <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value1== i  %}
@@ -44,21 +45,13 @@
 
             {% endfor %}
          </span>
+
+            </p>
         </div>
-     <div class="col-md-8">
-
-    <p>Commenti testuali</p>
-
-    </div>
-     </div>
-
-
-    <div class="row">
-        <div class="col-md-2">
-            <p>2</p>
-        </div>
-        <div class="col-md-2">
-         <span class="rating">
+        <div class="col-md-3">
+            <p>Quality of teaching</p>
+            <p>
+                 <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value2== i  %}
@@ -77,16 +70,13 @@
 
             {% endfor %}
      </span>
-     </div>
-     </div>
-
-
-    <div class="row">
-        <div class="col-md-2">
-            <p>3</p>
+            </p>
         </div>
-        <div class="col-md-2">
-         <span class="rating">
+        <div class="col-md-3">
+            <p>Quality of teaching</p>
+            <p>
+
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value3== i  %}
@@ -105,16 +95,12 @@
 
             {% endfor %}
           </span>
+            </p>
         </div>
-     </div>
-
-
-    <div class="row">
-        <div class="col-md-2">
-            <p>4</p>
-        </div>
-        <div class="col-md-2">
-         <span class="rating">
+        <div class="col-md-3">
+            <p>Quality of teaching</p>
+            <p>
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value4== i  %}
@@ -133,15 +119,15 @@
 
             {% endfor %}
           </span>
+
+            </p>
         </div>
-     </div>
 
    <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
             <p>5</p>
-        </div>
-        <div class="col-md-2">
-         <span class="rating">
+            <p>
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value5== i  %}
@@ -160,15 +146,13 @@
 
             {% endfor %}
           </span>
-        </div>
-     </div>
+            </p>
 
-    <div class="row">
-        <div class="col-md-2">
-            <p>6</p>
         </div>
-        <div class="col-md-2">
-         <span class="rating">
+        <div class="col-md-4">
+            <p>5</p>
+            <p>
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value6== i  %}
@@ -187,16 +171,12 @@
 
             {% endfor %}
           </span>
+            </p>
         </div>
-     </div>
-
-
-     <div class="row">
-        <div class="col-md-2">
-            <p>7</p>
-        </div>
-        <div class="col-md-2">
-         <span class="rating">
+        <div class="col-md-4">
+            <p>5</p>
+            <p>
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value7== i  %}
@@ -215,15 +195,15 @@
 
             {% endfor %}
           </span>
+            </p>
         </div>
-     </div>
+   </div>
 
      <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
             <p>8</p>
-        </div>
-        <div class="col-md-2">
-         <span class="rating">
+            <p>
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value8== i  %}
@@ -242,15 +222,13 @@
 
             {% endfor %}
           </span>
+            </p>
         </div>
-     </div>
-
-     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
             <p>9</p>
-        </div>
-        <div class="col-md-2">
-         <span class="rating">
+            <p>
+
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value9== i  %}
@@ -269,15 +247,14 @@
 
             {% endfor %}
           </span>
-        </div>
-     </div>
 
-     <div class="row">
-        <div class="col-md-2">
-            <p>10</p>
+            </p>
         </div>
-        <div class="col-md-2">
-         <span class="rating">
+        <div class="col-md-4">
+            <p>10</p>
+            <p>
+
+                <span class="rating">
 
             {% for i in [5,4,3,2,1] %}
                 {% if value10== i  %}
@@ -296,17 +273,55 @@
 
             {% endfor %}
           </span>
-        </div>
-     </div>
 
+        </div>
 
     </div>
-
-
-
+    </div>
 </div>
 
+
+<!-- commments -->
+<!-- http://bootsnipp.com/snippets/featured/comment-posts-layout  -->
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2 class="page-header">Tips</h2>
+        <section class="comment-list">
+          <!-- First Comment -->
+          <article class="row">
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="http://www.is.polito.it/images/personal/elisaughetto.jpg" />
+                <figcaption class="text-center">{{ name }}</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-10 col-sm-10">
+              <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                  <header class="text-left">
+                    <div class="comment-user"><i class="fa fa-user"></i> {{ name }}</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ datetime }}</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      {{ comment }}
+                    </p>
+                  </div>
+                  <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </section>
+    </div>
+  </div>
 </div>
+
+
+
 
 
 

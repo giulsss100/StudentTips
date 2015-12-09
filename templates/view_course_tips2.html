@@ -1,0 +1,92 @@
+<!--  Rating: https://www.everythingfrontend.com/posts/star-rating-input-pure-css.html
+  -->
+{% extends "base_template.html" %}
+<!-- value va da 1 a 5 e mi indica qual è la media per quel campo
+ field.value è quindi la valutazione di quel campo. es: field - quality of teaching ,da db ottengo che la media dei voti è 4:
+ field.value= 4, quindi saranno "checked" le prime quattro stelline-->
+
+{% block content %}
+
+    <link href="{{ url_for('static',  filename='css/rating.css') }}" rel="stylesheet">
+<!--TODO: Togliere l'hoover alle stelline. impostare un parametro come valore di default che poi verrà passato dal file.py -->
+
+    <!--metto tutte le votazioni nella prima colonna a destra, i commenti nella seconda colonna (piu grande) -->
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8"></div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4"></div>
+        <!-- Colonna a sinistra con i ratings -->
+
+        <table>
+
+            <tr>
+                <td>Quality of teaching </td>
+                <td><span class="rating">
+
+                {% for i in [5,4,3,2,1] %}
+                    {% if value1== i  %}
+
+                        <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                               id="rating-input-1-{{i}}" name="rating-input-1">
+                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                    {% else %}
+
+                        <input type="radio" class="rating-input " disabled="disabled"
+                               id="rating-input-1-{{i}}" name="rating-input-1">
+                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                    {% endif %}
+
+                {% endfor %}
+                </span></td>
+            </tr>
+
+            <tr>
+                <td>campo 2  </td>
+                <td><span class="rating">
+
+                {% for i in [5,4,3,2,1] %}
+                    {% if value2== i  %}
+
+                        <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                               id="rating-input-1-{{i}}" name="rating-input-1">
+                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                    {% else %}
+
+                        <input type="radio" class="rating-input " disabled="disabled"
+                               id="rating-input-1-{{i}}" name="rating-input-1">
+                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                    {% endif %}
+
+                {% endfor %}
+                </span></td>
+            </tr>
+
+
+
+        </table>
+
+
+        <div class="col-md-8">
+
+            <p>Tanti commenti</p>
+            <p>Tanti commenti</p>
+            <p>Tanti commenti</p>
+            <p>Tanti commenti</p>
+            <p>Tanti commenti</p>
+            <p>Tanti commenti</p>
+
+        </div>
+        <!-- spazio in centro con i commenti -->
+
+    </div>

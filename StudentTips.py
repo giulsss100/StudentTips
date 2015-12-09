@@ -65,13 +65,15 @@ def login():
 
 @app.route('/signup')
 def signup():
-    response=make_response(render_template('login.html', username=cookie_status(), title='Studentips - Signup'))
+    response=make_response(render_template('signup.html', username=cookie_status(), title='Studentips - Signup'))
     cookie_setting(response, 'user', cookie_status())
     return response
 
 @app.route('/course_tips')
 def course_tips():
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips', value1=1,value2=1, value3=5, value4=4, value5=5, value6=1, value7=2, value8=3, value9=4, value10=1))
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
+                                           value1=1,value2=5, value3=5, value4=4, value5=5, value6=1, value7=2, value8=3, value9=4, value10=1,
+                                           name="loveAccounting", datetime="Dec 09, 2015", comment="This is my comment" ))
     cookie_setting(response, 'user', cookie_status())
     return response
 
