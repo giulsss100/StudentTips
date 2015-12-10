@@ -2,13 +2,6 @@ from flask import Flask, render_template, request, make_response
 
 app = Flask(__name__)
 
-"""static folder is used for HTML, CSS and other static files
-templates, instead, contains all dynamic folders
-
-@app.rout('address in which we'll have to search')
-def name of the page():
-    return render.template('pageName.html',...)"""
-
 """Login"""
 def login_user():
   if ('input_email' in request.form) and ('input_password' in request.form):
@@ -43,7 +36,7 @@ def cookie_status():
 """Set the cookie"""
 def cookie_setting(response_page, cookie_name, cookie_value):
     if cookie_value != '':
-        if 'remember_me' in request.form: #wait for HTML for signed user to check if this is correct
+        if 'remember_me' in request.form:
             response_page.set_cookie(cookie_name, cookie_value, 3600*24*365*99)
         else: #cookie available for just 10 minutes
             response_page.set_cookie(cookie_name, cookie_value, 60*10)
@@ -57,19 +50,19 @@ def homepage():
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/login')
+@app.route('/login', methods=["POST", "GET"])
 def login():
     response=make_response(render_template('login.html', username=cookie_status(), title='Studentips - Login'))
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/signup')
+@app.route('/signup', methods=["POST", "GET"])
 def signup():
     response=make_response(render_template('signup.html', username=cookie_status(), title='Studentips - Signup'))
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/course_tips')
+@app.route('/course_tips', methods=["POST", "GET"])
 def course_tips():
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            value1=1,value2=5, value3=5, value4=4, value5=5, value6=1, value7=2, value8=3, value9=4, value10=1,
