@@ -71,9 +71,14 @@ def signup():
 
 @app.route('/course_tips')
 def course_tips():
+
+    #value 1... saranno i valori medi delle recensioni dei vari campi --> posso scriverli sotto forma di lista?
+    #tip_list sara la lista di tip per quel corso, ottenuta con una query
+    #tip_list=tips.query.filter(...) o qualcosa del genere
+    tip_list=()
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            value1=1,value2=5, value3=5, value4=4, value5=5, value6=1, value7=2, value8=3, value9=4, value10=1,
-                                           name="loveAccounting", datetime="Dec 09, 2015", comment="This is my comment" ))
+                                           tip_list=tip_list ))
     cookie_setting(response, 'user', cookie_status())
     return response
 

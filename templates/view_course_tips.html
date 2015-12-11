@@ -283,30 +283,33 @@
 
 <!-- commments -->
 <!-- http://bootsnipp.com/snippets/featured/comment-posts-layout  -->
-
     <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <h2 class="page-header">Tips</h2>
+
+       {% if tip_list %}
         <section class="comment-list">
-          <!-- First Comment -->
+
+            {% for tip in tip_list %}
+          <!--Start Comment -->
           <article class="row">
             <div class="col-md-2 col-sm-2 hidden-xs">
               <figure class="thumbnail">
                 <img class="img-responsive" src="http://www.is.polito.it/images/personal/elisaughetto.jpg" />
-                <figcaption class="text-center">{{ name }}</figcaption>
+                <figcaption class="text-center">{{ tip.user_email }}</figcaption> <!-- Oppure possiamo mettere nome e cognome dello user -->
               </figure>
             </div>
             <div class="col-md-10 col-sm-10">
               <div class="panel panel-default arrow left">
                 <div class="panel-body">
                   <header class="text-left">
-                    <div class="comment-user"><i class="fa fa-user"></i> {{ name }}</div>
-                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ datetime }}</time>
-                  </header>
+                    <div class="comment-user"><i class="fa fa-user"></i> {{ tip.user_email }}</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ tip.time }}</time>
+                  </header><!-- NB: tip.time deve essere un date time scritto in questo modo! -->
                   <div class="comment-post">
                     <p>
-                      {{ comment }}
+                      {{ tip.note }}
                     </p>
                   </div>
                   <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
@@ -315,7 +318,18 @@
             </div>
           </article>
 
+            {% endfor %}
+
+
         </section>
+
+       {% endif %}
+       <!-- Se dalla query ottengo una lista vuota -->
+        {% if not tip_list %}
+
+            <p>No tips for this course have been found</p>
+
+        {% endif %}
     </div>
   </div>
 </div>
