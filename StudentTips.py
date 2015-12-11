@@ -1,20 +1,34 @@
 from flask import Flask, render_template, request, make_response
+from TipProvv import TipProvv
 
 app = Flask(__name__)
 
-"""Login"""
+"""Login or Signup"""
 def login_user():
   if ('input_email' in request.form) and ('input_password' in request.form):
         user_mail = request.form['input_email']
         user_password = request.form['input_password']
-        # here we should include communication with DB, to check if credentials are correct
-        """user = User.query.filter_by((email=user_email) & (password=user_password)).first()"""
-        """update is_logged"""
-        # in case of correct login, we set the cookies
-        """response = make_response(render_template('index.html', title='Studentips', username=user.first_name))"""
-        return user_mail
-        #if controlli:
-        #    return ''
+        if('input_firstname' in request.form): #user is subscribing
+            firstname = request.form['input_firstname']
+            lastname = request.form['input_lastname']
+            university = request.form['input_university']
+            faculty = request.form['input_faculty']
+            phone = request.form['input_phone']
+            confirm_password = request.form['input_confirm_password']
+            return user_mail
+            #if mail already in DB
+            #return ''
+            #if password and confirm password not corresponding
+            #return ''
+        else: #user is logging in
+            # here we should include communication with DB, to check if credentials are correct
+            """user = User.query.filter_by((email=user_email) & (password=user_password)).first()"""
+            """update is_logged"""
+            # in case of correct login, we set the cookies
+            """response = make_response(render_template('index.html', title='Studentips', username=user.first_name))"""
+            return user_mail
+            #if controlli:
+            #    return ''
   return ''
 
 
@@ -38,10 +52,19 @@ def cookie_setting(response_page, cookie_name, cookie_value):
     if cookie_value != '':
         if 'remember_me' in request.form:
             response_page.set_cookie(cookie_name, cookie_value, 3600*24*365*99)
-        else: #cookie available for just 10 minutes
-            response_page.set_cookie(cookie_name, cookie_value, 60*10)
+        else: #cookie available for just 5 minutes
+            response_page.set_cookie(cookie_name, cookie_value, 60*5)
     else: #unset the cookie
         response_page.set_cookie(cookie_name, '', 0)
+
+"""Average rating for a field (tips)"""
+def avg_rating(tip_list, field):
+    num_tips = len(tip_list)
+    tot_stars = 0
+    for tip in tip_list:
+        info = tip.get_info()
+        tot_stars = tot_stars + info[field]
+    return int(tot_stars/num_tips)
 
 
 @app.route('/', methods=["POST", "GET"])
@@ -50,44 +73,50 @@ def homepage():
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/login', methods=["POST", "GET"])
+@app.route('/login')
 def login():
     response=make_response(render_template('login.html', username=cookie_status(), title='Studentips - Login'))
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/signup', methods=["POST", "GET"])
+@app.route('/signup')
 def signup():
     response=make_response(render_template('signup.html', username=cookie_status(), title='Studentips - Signup'))
     cookie_setting(response, 'user', cookie_status())
     return response
 
-
-# classi create per testare la pagina course tip che pero per ora non funziona proprio parametrizzata in questo modo -> perche??
-class Rating:
-    def __init__(self, name, value):
-        self.name=name
-        self.value=value
-
-class Tip:
-    def __init__(self, user_email, time, note):
-        self.user_email=user_email
-        self.time=time
-        self.note=note
-
 @app.route('/course_tips', methods=["POST", "GET"])
 def course_tips():
 
+    """tip_list: list of tips for the tuple (course, professor)"""
+    tip_list = [] #from DB
 
-    #tip_list sara la lista di tip per quel corso, ottenuta con una query
-    #tip_list=tips.query.filter(...) o qualcosa del genere
+    tip1 = TipProvv('16-12-2014 01:05', 'john.lennon@gmail.com', 'boh', 5, 2, 5, 1, 4, 2, 4, 5, 3, 2, 'Slides are the way.')
+    tip2 = TipProvv('16-12-2014 01:05', 'paul.mccartney@gmail.com', 'boh', 5, 5, 5, 3, 3, 3, 4, 5, 4, 3, 'Ask the professor if you have problems.')
+    tip3 = TipProvv('16-12-2014 01:05', 'george.harrison@gmail.com', 'boh', 5, 1, 3, 2, 3, 2, 4, 5, 1, 3, 'This course will destroy your life.')
+    tip4 = TipProvv('16-12-2014 01:05', 'ringo.starr@gmail.com', 'boh', 5, 4, 4, 3, 5, 1, 3, 1, 3, 3, 'Easy. Cool.')
 
-    tip1=Tip("giulia@hotmail.it","16-12-2014", "Commento" )
-    tip_list=()
-    rating1= Rating("Quality of teaching", 3)
-    rating_list=()
+    tip_list.append(tip1)
+    tip_list.append(tip2)
+    tip_list.append(tip3)
+    tip_list.append(tip4)
 
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',tot_recensioni=20, medium_rate=3, rating_list=rating_list,
+    """rating_list: list of average ratings for the tuple (course, professor)"""
+    rating_list = {}
+
+    rating_list['Quality of Teaching'] = avg_rating(tip_list, '_teaching')
+    rating_list['Comprehension of Course Objectives'] = avg_rating(tip_list, '_comprehension')
+    rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
+    rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
+    rating_list['Utility of academic Material'] = avg_rating(tip_list, '_material')
+    rating_list['Utility of Textbooks'] = avg_rating(tip_list, '_books')
+    rating_list['Necessity to attend Lectures'] = avg_rating(tip_list, '_attending')
+    rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
+    rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
+    rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
+
+
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips', rating_list=rating_list,
                                            tip_list=tip_list ))
     cookie_setting(response, 'user', cookie_status())
     return response
