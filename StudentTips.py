@@ -87,7 +87,7 @@ def course_tips():
     rating1= Rating("Quality of teaching", 3)
     rating_list=()
 
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips', rating_list=rating_list,
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',tot_recensioni=20, medium_rate=3, rating_list=rating_list,
                                            tip_list=tip_list ))
     cookie_setting(response, 'user', cookie_status())
     return response

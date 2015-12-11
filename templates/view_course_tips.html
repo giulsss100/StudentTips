@@ -14,7 +14,33 @@
 
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p>{{ tot_recensioni }} recensioni</p>
+        </div>
+        <div class="col-md-6">
+            <span class="rating">
 
+                    {% for i in [5,4,3,2,1] %}
+                        {% if medium_rate== i  %}
+
+                            <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                                   id="rating-input-1-{{i}}" name="rating-input-1">
+                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                        {% else %}
+
+                            <input type="radio" class="rating-input " disabled="disabled"
+                                   id="rating-input-1-{{i}}" name="rating-input-1">
+                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+            </span>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
@@ -37,13 +63,13 @@
                         {% if rating.value== i  %}
 
                             <input type="radio" class="rating-input" disabled="disabled" checked="checked"
-                                   id="rating-input-1-{{i}}" name="rating-input-1">
+                                   id="rating-input-1-{{i}}" name={{ rating.name }}>
                             <label for="rating-input-1-{{i}}" class="rating-star"></label>
 
                         {% else %}
 
                             <input type="radio" class="rating-input " disabled="disabled"
-                                   id="rating-input-1-{{i}}" name="rating-input-1">
+                                   id="rating-input-1-{{i}}" name={{ rating.name }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
                             <label for="rating-input-1-{{i}}" class="rating-star"></label>
 
                         {% endif %}
