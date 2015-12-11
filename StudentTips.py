@@ -62,15 +62,32 @@ def signup():
     cookie_setting(response, 'user', cookie_status())
     return response
 
+
+# classi create per testare la pagina course tip che pero per ora non funziona proprio parametrizzata in questo modo -> perche??
+class Rating:
+    def __init__(self, name, value):
+        self.name=name
+        self.value=value
+
+class Tip:
+    def __init__(self, user_email, time, note):
+        self.user_email=user_email
+        self.time=time
+        self.note=note
+
 @app.route('/course_tips', methods=["POST", "GET"])
 def course_tips():
 
-    #value 1... saranno i valori medi delle recensioni dei vari campi --> posso scriverli sotto forma di lista?
+
     #tip_list sara la lista di tip per quel corso, ottenuta con una query
     #tip_list=tips.query.filter(...) o qualcosa del genere
+
+    tip1=Tip("giulia@hotmail.it","16-12-2014", "Commento" )
     tip_list=()
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
-                                           value1=1,value2=5, value3=5, value4=4, value5=5, value6=1, value7=2, value8=3, value9=4, value10=1,
+    rating1= Rating("Quality of teaching", 3)
+    rating_list=()
+
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips', rating_list=rating_list,
                                            tip_list=tip_list ))
     cookie_setting(response, 'user', cookie_status())
     return response
