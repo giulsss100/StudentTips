@@ -14,18 +14,16 @@
 
 
 <div class="container">
-    <div class="row">
+<div class="row">
         <div class="col-md-6">
-            <p>{{ tip_list|length }} tips</p>
+           <p>{{ tip_list|length }} tips founded for this course</p>
         </div>
-        {% for field, rating in rating_list.iteritems() %}
-        <!-- non so come funzioni l'html di questa parte, ma qui riceverete
-            il field, ad esempio, Quality of teaching e il rating, che è il valore medio -->
+        <!-- qua ricevo il valore medio di tutti i field -->
             <div class="col-md-6">
+                <p>Overall rating</p>
                 <span class="rating">
-
                         {% for i in [5,4,3,2,1] %}
-                            {% if rating == i  %}
+                            {% if medium_rating == i  %}
 
                                 <input type="radio" class="rating-input" disabled="disabled" checked="checked"
                                        id="rating-input-1-{{i}}" name="rating-input-1">
@@ -43,7 +41,7 @@
 
                 </span>
             </div>
-        {% endfor %}
+
     </div>
     <div class="row">
         <div class="col-md-4"></div>
@@ -51,11 +49,9 @@
         <div class="col-md-4"></div>
 
     </div>
-    {% for field, rating in rating_list.iteritems() %}
-        <!-- non so come funzioni l'html di questa parte, ma qui riceverete
-            il field, ad esempio, Quality of teaching e il rating, che è il valore medio
 
-            Ho commentato anche qui, non so che cosa sia il primo for e quest'altro for-->
+    {% for field, rating in rating_list.iteritems() %}
+        <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
     <div class="row">
 
         <div class="col-md-4">
@@ -100,7 +96,7 @@
     <div class="col-md-12">
       <h2 class="page-header">Tips</h2>
 
-       {% if tip_list|length == 0 %}
+       {% if tip_list|length != 0 %}
         <section class="comment-list">
             {% for tip in tip_list %}
               <!--Start Comment -->

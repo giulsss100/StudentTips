@@ -66,6 +66,13 @@ def avg_rating(tip_list, field):
         tot_stars = tot_stars + info[field]
     return int(tot_stars/num_tips)
 
+"""Average rating of all fields"""
+def tot_avg_rating(rating_list):
+    tot_rating=0
+    for value in rating_list.values():
+        tot_rating=tot_rating+value
+    return int (tot_rating/10)
+
 
 @app.route('/', methods=["POST", "GET"])
 def homepage():
@@ -115,8 +122,10 @@ def course_tips():
     rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
     rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
 
+    medium_rating=tot_avg_rating(rating_list)
 
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips', rating_list=rating_list,
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
+                                           medium_rating=medium_rating, rating_list=rating_list,
                                            tip_list=tip_list ))
     cookie_setting(response, 'user', cookie_status())
     return response
