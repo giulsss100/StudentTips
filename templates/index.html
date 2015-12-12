@@ -95,27 +95,27 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
             </div><!-- /.col-lg-4 -->
         </div>
 
-        <form class="form-signin index" id="formYourCourse" action = "{{ url_for('course_tips') }}">
+        <form class="form-signin index" id="formYourCourse" action = "{{ url_for('course_tips') }}" target="_self" method="post">
             <div class="input-group">
                 <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                <label for="inputCourse" class="sr-only">Course</label>
-                <input type="text" id="inputCourse" class="form-control" placeholder="Course" required autofocus>
+                <label for="input_course" class="sr-only">Course</label>
+                <input type="text" name="input_course" class="form-control" placeholder="Course" required autofocus>
             </div>
             <div class="input-group">
                 <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                <label for="inputProfessor" class="sr-only">Professor</label>
-                <input type="text" id="inputProfessor" class="form-control" placeholder="Professor" required>
+                <label for="input_professor" class="sr-only">Professor</label>
+                <input type="text" name="input_professor" class="form-control" placeholder="Professor" required>
             </div>
-            <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 3%">Search</button>
+            <button class="btn btn-lg btn-success btn-block" name="btn_submit" value="search_yourcouse" type="submit" style="margin-top: 3%">Search</button>
         </form>
 
-        <form class="form-signin index" id="formUniversity">
+        <form class="form-signin index" id="formUniversity" action = "{{ url_for('university_tips') }}" target="_self" method="post">
         <div class="input-group">
               <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-education"></span></span>
-              <label for="inputUniversity" class="sr-only">University</label>
-              <input type="text" id="inputUniversity" class="form-control" placeholder="University" required autofocus>
+              <label for="input_university" class="sr-only">University</label>
+              <input type="text" name="input_university" class="form-control" placeholder="University" required autofocus>
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 3%">Search</button>
+        <button class="btn btn-lg btn-success btn-block" name="btn_submit" value="search_university" type="submit" style="margin-top: 3%">Search</button>
       </form>
 
         <form class="form-signin index" id="formTutors">
@@ -134,7 +134,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
             <label for="inputProfessor" class="sr-only">Professor</label>
             <input type="text" id="inputProfessor" class="form-control" placeholder="Professor (optional)">
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 3%">Search</button>
+        <button class="btn btn-lg btn-success btn-block" name="btn_submit" value="search_tutors" type="submit" style="margin-top: 3%">Search</button>
       </form>
 
         <form class="form-signin index" id="formMaterial">
@@ -153,7 +153,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
             <label for="inputProfessor" class="sr-only">Professor</label>
             <input type="text" id="inputProfessor" class="form-control" placeholder="Professor (optional)">
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 3%">Search</button>
+        <button class="btn btn-lg btn-success btn-block" name="btn_submit" value="search_material" type="submit" style="margin-top: 3%">Search</button>
       </form>
 
       <!-- START THE FEATURETTES -->

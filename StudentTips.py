@@ -71,10 +71,10 @@ def tot_avg_rating(rating_list):
     tot_rating=0
     for value in rating_list.values():
         tot_rating=tot_rating+value
-    return int (tot_rating/10)
+    return int (tot_rating/len(rating_list))
 
 
-@app.route('/', methods=["POST", "GET"])
+@app.route('/', methods=["POST"])
 def homepage():
     response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
     cookie_setting(response, 'user', cookie_status())
@@ -92,8 +92,18 @@ def signup():
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/course_tips', methods=["POST", "GET"])
+@app.route('/course_tips', methods=["POST"])
 def course_tips():
+    """Here we are sure the user has started a search for a course and a professor"""
+    course = request.form['input_course']
+    professor = request.form['input_professor']
+
+    #1. RESEARCH THE COUPLE (COURSE, PROFESSOR)
+    #2. IF IT EXISTS, GET THE ID OF THE COUPLE
+    #3. SEARCH ALL THE TIPS HAVING THAT ID FOR COURSE, PROFESSOR
+    #4. GET THE LIST OF TIPS AND SAVE IT TO tip_list
+
+    #5. FOR EACH USER MAIL, GET USER
 
     """tip_list: list of tips for the tuple (course, professor)"""
     tip_list = [] #from DB
@@ -127,6 +137,19 @@ def course_tips():
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            medium_rating=medium_rating, rating_list=rating_list,
                                            tip_list=tip_list ))
+    cookie_setting(response, 'user', cookie_status())
+    return response
+
+@app.route('/university_tips', methods=["POST"])
+def university_tips():
+    """Here we are sure the user has started a search for a university"""
+    university = request.form['input_university']
+
+    #1. RESEARCH USERS FOR THAT UNIVERSITY
+    #2. ADD TIPS THEY GAVE
+
+    #change response
+    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - University Tips'))
     cookie_setting(response, 'user', cookie_status())
     return response
 
