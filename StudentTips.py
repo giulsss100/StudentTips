@@ -148,8 +148,31 @@ def university_tips():
     #1. RESEARCH USERS FOR THAT UNIVERSITY
     #2. ADD TIPS THEY GAVE
 
-    #change response
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - University Tips'))
+    #List of tips where the writer of the tip belong to the universtity searched
+    tip_list = [] #from DB
+
+    tip1 = TipProvv('16-12-2014 01:05', 'john.lennon@gmail.com', 'boh', 5, 2, 5, 1, 4, 2, 4, 5, 3, 2, 'Slides are the way.')
+    tip2 = TipProvv('16-12-2014 01:05', 'paul.mccartney@gmail.com', 'boh', 5, 5, 5, 3, 3, 3, 4, 5, 4, 3, 'Ask the professor if you have problems.')
+    tip3 = TipProvv('16-12-2014 01:05', 'george.harrison@gmail.com', 'boh', 5, 1, 3, 2, 3, 2, 4, 5, 1, 3, 'This course will destroy your life.')
+    tip4 = TipProvv('16-12-2014 01:05', 'ringo.starr@gmail.com', 'boh', 5, 4, 4, 3, 5, 1, 3, 1, 3, 3, 'Easy. Cool.')
+
+    tip_list.append(tip1)
+    tip_list.append(tip2)
+    tip_list.append(tip3)
+    tip_list.append(tip4)
+
+
+    """rating_list: list of average ratings for the university"""
+    rating_list = {}
+
+    rating_list['Quality of Teaching'] = avg_rating(tip_list, '_teaching')
+    rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
+    rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
+    rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
+
+
+    response=make_response(render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips', rating_list=rating_list,
+                                           tip_list=tip_list ))
     cookie_setting(response, 'user', cookie_status())
     return response
 
