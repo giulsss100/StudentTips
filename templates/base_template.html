@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="{{ url_for('static',  filename='css/bootstrap.min.css') }}" rel="stylesheet">
 <link rel="shortcun icon" href="{{ url_for('static', filename='images/icon.png') }}">
     <!-- Custom styles for this template -->
@@ -48,11 +49,11 @@
     {% endblock %}
 </head>
 <body>
-    <div id="content">{% block content %}
+    {% block content %}
 
     {% endblock %}
 
-    </div>
+
  {% block footer %}
     <div id="footer">
 

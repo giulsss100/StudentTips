@@ -74,7 +74,7 @@ def tot_avg_rating(rating_list):
     return int (tot_rating/len(rating_list))
 
 
-@app.route('/', methods=["POST"])
+@app.route('/',methods=['GET', 'POST'])
 def homepage():
     response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
     cookie_setting(response, 'user', cookie_status())
@@ -92,7 +92,7 @@ def signup():
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/course_tips', methods=["POST"])
+@app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
     """Here we are sure the user has started a search for a course and a professor"""
     course = request.form['input_course']
@@ -140,7 +140,7 @@ def course_tips():
     cookie_setting(response, 'user', cookie_status())
     return response
 
-@app.route('/university_tips', methods=["POST"])
+@app.route('/university_tips',methods=['GET', 'POST'])
 def university_tips():
     """Here we are sure the user has started a search for a university"""
     university = request.form['input_university']

@@ -76,3 +76,33 @@
 .comment-list .comment-post {
   margin-top: 6px;
 }
+/* Layout stelle e commenti */
+/* Overall Rating */
+
+#overall_rating{
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+#star{
+
+  float:left;
+  padding:5px;
+  height: 40%;
+  padding-top: 20px;
+
+
+}
+#comments{
+  float:left;
+
+  padding-left: 30px;
+
+
+}
+p.o_rating{
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  font-size: 2em;
+}

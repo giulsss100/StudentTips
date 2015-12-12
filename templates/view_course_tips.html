@@ -1,3 +1,6 @@
+<!-- TODO: migliorare lo stile della pagina (colori ecc)-->
+<!-- TODO: perche il footer si è messo li?-->
+<!-- TODO: mettere il dettaglio del tip sotto forma di stelle -->
 <!--  Rating: https://www.everythingfrontend.com/posts/star-rating-input-pure-css.html
   -->
 {% extends "base_template.html" %}
@@ -10,17 +13,28 @@
     <link href="{{ url_for('static',  filename='css/fixed_rating.css') }}" rel="stylesheet">
     <link href="{{ url_for('static',  filename='css/comments2.css') }}" rel="stylesheet">
 
-<!--TODO: Togliere l'hoover alle stelline.  -->
+    <script type="text/javascript">
 
+        function show(elementId) {
 
-<div class="container">
-<div class="row">
-        <div class="col-md-6">
-           <p>{{ tip_list|length }} tips founded for this course</p>
-        </div>
+      document.getElementById(elementId).style.display="block";
+    }
+      function hide(elementId) {
+
+      document.getElementById(elementId).style.display="none";
+    }
+
+</script>
+
+<!--TODO: Togliere il segno di divieto -->
+<div id="content">
+<div id="overall_rating">
+
+           <p>{{ tip_list|length }} people rated this course</p>
+
         <!-- qua ricevo il valore medio di tutti i field -->
-            <div class="col-md-6">
-                <p>Overall rating</p>
+
+                <p class="o_rating">Overall rating
                 <span class="rating">
                         {% for i in [5,4,3,2,1] %}
                             {% if medium_rating == i  %}
@@ -39,27 +53,16 @@
 
                         {% endfor %}
 
-                </span>
-            </div>
+                </span></p>
+</div>
 
-    </div>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
 
-    </div>
+<div id="star">
 
     {% for field, rating in rating_list.iteritems() %}
         <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
-    <div class="row">
 
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-6">
                     <p>{{ field }}</p>
-                </div>
-                <div class="col-md-6">
 
                     <span class="rating">
 
@@ -82,18 +85,16 @@
 
                     </span>
 
-                </div>
-            </div>
-        </div>
-    </div>
+
+
     {% endfor %}
 
+</div>
 
+
+<div id="comments">
 <!-- commments -->
 <!-- http://bootsnipp.com/snippets/featured/comment-posts-layout  -->
-    <div class="container">
-  <div class="row">
-    <div class="col-md-12">
       <h2 class="page-header">Tips</h2>
 
        {% if tip_list|length != 0 %}
@@ -103,7 +104,7 @@
               <article class="row">
                 <div class="col-md-2 col-sm-2 hidden-xs">
                   <figure class="thumbnail">
-                    <img class="img-responsive" src="http://www.is.polito.it/images/personal/elisaughetto.jpg" />
+                    <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
                     <figcaption class="text-center">{{ tip.user_email }}</figcaption> <!-- Oppure possiamo mettere nome e cognome dello user -->
                   </figure>
                 </div>
@@ -119,7 +120,15 @@
                           {{ tip.note }}
                         </p>
                       </div>
-                      <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                        <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip }}');">Details</button>
+                        <div id="tipDetail{{ tip }}" style="display:none;"><p>Professor Availability: {{ tip._availability }}</p>
+                           <p> Difficulty of the exam: {{ tip._difficulty }}</p> <p>Participation of Students during lectures: {{ tip._attending }}</p>
+                            <p>Quality of teaching: {{ tip._teaching }} </p>
+                        <p>Utility of textbooks: {{ tip._books }} </p><p>Time availability at exam: {{ tip._time }} </p>
+                        <p>Rapidity in receiving exam results: {{ tip._result_rapidity }} </p><p>Necessity to attend lectures: {{ tip._attending }} </p>
+                        <p>Comprehension of course objectives: {{ tip._comprehension }} </p><p>Utility of academic material: {{ tip._material }} </p>
+                         <button id="hideDetail" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip }}');">Less Details</button>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -135,13 +144,7 @@
 
         {% endif %}
     </div>
-  </div>
-</div>
 
-
-
-
-
-
-
+    </div>
 {% endblock %}
+
