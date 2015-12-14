@@ -95,8 +95,8 @@ def signup():
 @app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
     """Here we are sure the user has started a search for a course and a professor"""
-    course = request.form['input_course']
-    professor = request.form['input_professor']
+    #course = request.form['input_course']
+    #professor = request.form['input_professor']
 
     #1. RESEARCH THE COUPLE (COURSE, PROFESSOR)
     #2. IF IT EXISTS, GET THE ID OF THE COUPLE
@@ -143,7 +143,7 @@ def course_tips():
 @app.route('/university_tips',methods=['GET', 'POST'])
 def university_tips():
     """Here we are sure the user has started a search for a university"""
-    university = request.form['input_university']
+    #university = request.form['input_university']
 
     #1. RESEARCH USERS FOR THAT UNIVERSITY
     #2. ADD TIPS THEY GAVE
