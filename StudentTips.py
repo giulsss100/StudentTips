@@ -95,8 +95,9 @@ def signup():
 @app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
     """Here we are sure the user has started a search for a course and a professor"""
-    course = request.form['input_course']
-    professor = request.form['input_professor']
+
+    #course = request.form['input_course']
+    #professor = request.form['input_professor']
 
     #1. RESEARCH THE COUPLE (COURSE, PROFESSOR)
     #2. IF IT EXISTS, GET THE ID OF THE COUPLE
@@ -133,17 +134,18 @@ def course_tips():
     rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
 
     medium_rating=tot_avg_rating(rating_list)
-
+     #course = request.form['input_course']
+    #professor = request.form['input_professor']
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            medium_rating=medium_rating, rating_list=rating_list,
-                                           tip_list=tip_list ))
+                                           tip_list=tip_list, course="Economics", professor="Cambini"))
     cookie_setting(response, 'user', cookie_status())
     return response
 
 @app.route('/university_tips',methods=['GET', 'POST'])
 def university_tips():
     """Here we are sure the user has started a search for a university"""
-    university = request.form['input_university']
+    #university = request.form['input_university']
 
     #1. RESEARCH USERS FOR THAT UNIVERSITY
     #2. ADD TIPS THEY GAVE
@@ -174,6 +176,13 @@ def university_tips():
     response=make_response(render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips', rating_list=rating_list,
                                            tip_list=tip_list ))
     cookie_setting(response, 'user', cookie_status())
+    return response
+
+
+@app.route('/add_tip', methods=['GET', 'POST'])
+def add_tip():
+
+    response=make_response(render_template('add_tip.html', username=cookie_status(), title='Studentips - Add Tip' ))
     return response
 
 

@@ -89,7 +89,7 @@
   padding:5px;
   height: 40%;
   padding-top: 20px;
-
+  width:30%;
 
 }
 #comments{
@@ -106,3 +106,4 @@ p.o_rating{
   color: inherit;
   font-size: 2em;
 }
+
