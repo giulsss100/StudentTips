@@ -1,5 +1,135 @@
+<!-- non mi conviene usare dei for per elencare gli items, per ciascuno devo salvare il voto da qualche parte, con il for è volatile? o c'è un modo? -->
+<!-- su firefox l'impaginazione è sbagliata-->
+<!-- TODO: modificare tasto submit dimensioni sbagliate-->
+<!-- TODO: abbellimento-->
 {% extends "base_template.html" %}
-<!--pagina di simona-->
+
 {% block content %}
-    <p>add tip</p>
+     <link href="{{ url_for('static',  filename='css/rating.css') }}" rel="stylesheet">
+    <p>Please rate the course by giving from 1 to 5 stars to each item</p>
+
+    <div id="content">
+
+       <div class="input-group">
+                <p class="field"> How is the quality of teaching?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-1-{{ i }}" name="rating-input-1">
+                        <label for="rating-input-1-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+       </div>
+        <div class="input-group">
+                <p class="field"> Are the course's objectives clear and comprehensive?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-2-{{ i }}" name="rating-input-2">
+                        <label for="rating-input-2-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Is the professor available?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-3-{{ i }}" name="rating-input-3">
+                        <label for="rating-input-3-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Are students able to interact and partecipate during lessons?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-4-{{ i }}" name="rating-input-4">
+                        <label for="rating-input-4-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Is the teaching material (slides, exercises) useful for studying?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-5-{{ i }}" name="rating-input-5">
+                        <label for="rating-input-5-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Is the textbook useful for studying?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-6-{{ i }}" name="rating-input-6">
+                        <label for="rating-input-6-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Is it necessary to attend classes?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-7-{{ i }}" name="rating-input-7">
+                        <label for="rating-input-7-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Score the difficulty of the exam:
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-8-{{ i }}" name="rating-input-8">
+                        <label for="rating-input-8-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Is the examination time provided enough?
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-9-{{ i }}" name="rating-input-9">
+                        <label for="rating-input-9-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+        <div class="input-group">
+                <p class="field"> Give a score to the speed of professor in correcting the exams:
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        <input type="radio" class="rating-input "
+                            id="rating-input-10-{{ i }}" name="rating-input-10">
+                        <label for="rating-input-10-{{ i }}" class="rating-star"></label>
+
+                    {% endfor %}
+                </span></p>
+        </div>
+
+         <div class="input-group">
+
+                <p class="field">Here you can add all the advice and tips that you think people attending this course should know: </p>
+                <textarea rows="5" cols="50" class="boh">
+
+                </textarea>
+        </div>
+        <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 3%">Submit</button>
+    </div>
+</div>
+
 {% endblock %}
