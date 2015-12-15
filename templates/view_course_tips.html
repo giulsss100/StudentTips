@@ -10,9 +10,6 @@
 
 {% block content %}
 
-    <link href="{{ url_for('static',  filename='css/fixed_rating.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static',  filename='css/comments2.css') }}" rel="stylesheet">
-
     <script type="text/javascript">
 
         function show(elementId) {
@@ -26,7 +23,6 @@
 
 </script>
 
-<!--TODO: Togliere il segno di divieto -->
 <div id="content">
 <div id="overall_rating">
 
@@ -54,7 +50,15 @@
                         {% endfor %}
 
                 </span></p>
-</div>
+            <!-- Passo come campi nasconti corso e professore cercati dall'utente che poi saranno utilizzati nel form di aggiunta tip-->
+                 <form class="form-add-tip" id="form_add_tip" action = "{{ url_for('add_tip') }}">
+                    <input type="hidden" name="course" value={{ course }}>
+                     <input type="hidden" name="professor" value={{ professor }}>
+                    <button class="btn btn-lg btn-success" style="margin-top: 0.4%; margin-bottom: 0.4%" name="add_tip" type="submit">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Tip
+                    </button>
+                  </form>
+            </div>
 
 
 <div id="star">
@@ -146,5 +150,10 @@
     </div>
 
     </div>
+{% endblock %}
+
+
+{% block footer %}
+<!--TODO: rimettere il footer in fondo alla pagina -->
 {% endblock %}
 
