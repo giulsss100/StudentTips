@@ -8,23 +8,7 @@
      <link href="{{ url_for('static',  filename='css/rating.css') }}" rel="stylesheet">
     <p>Please rate the course by giving from 1 to 5 stars to each item</p>
 
-<!--
-    {% for field, rating in rating_list.iteritems() %}
-        <div class="input-group">
-            <p class="field">{{ field }}</p>
-                <span class="rating">
-                    {% for i in [5,4,3,2,1] %}
-                    <span class="rating">
-                        <input type="radio" class="rating-input "
-                            id="rating-input-1-{{ i }}" name="rating-input-1">
-                        <label for="rating-input-1-{{ i }}" class="rating-star"></label>
-                    </span>
-                    {% endfor %}
-                </span>
 
-        </div>
-    {% endfor %}
--->
     <div id="content">
 
        <div class="input-group">
@@ -141,7 +125,7 @@
          <div class="input-group">
 
                 <p class="field">Here you can add all the advice and tips that you think people attending this course should know: </p>
-                <textarea rows="5" cols="50" class="boh">
+                <textarea rows="5" cols="50" class="text">
 
                 </textarea>
         </div>
