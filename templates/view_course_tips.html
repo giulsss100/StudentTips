@@ -99,21 +99,21 @@
 
        {% if tip_list|length != 0 %}
         <section class="comment-list">
-            {% for tip in tip_list %}
+            {% for user, tip in tip_list.iteritems() %}
               <!--Start Comment -->
               <article class="row">
                 <div class="col-md-2 col-sm-2 hidden-xs">
                   <figure class="thumbnail">
-                    <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                    <figcaption class="text-center">{{ tip.user_email }}</figcaption> <!-- Oppure possiamo mettere nome e cognome dello user -->
+                    <img class="img-responsive" src = "" />
+                    <figcaption class="text-center">{{ user.first_name }}</figcaption> <!-- Oppure possiamo mettere nome e cognome dello user -->
                   </figure>
                 </div>
                 <div class="col-md-10 col-sm-10">
                   <div class="panel panel-default arrow left">
                     <div class="panel-body">
                       <header class="text-left">
-                        <div class="comment-user"><i class="fa fa-user"></i> {{ tip.user_email }}</div>
-                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ tip.id }}</time>
+                        <div class="comment-user"><i class="fa fa-user"></i> {{ user.first_name }} {{ user.last_name }}</div>
+                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ tip.time }}</time>
                       </header><!-- NB: tip.time deve essere un date time scritto in questo modo! -->
                       <div class="comment-post">
                         <p>

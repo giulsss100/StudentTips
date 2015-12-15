@@ -30,7 +30,7 @@
         <!-- TODO: Mettere il login a destra -->
         <div class="login">
         {% if username %}
-                Welcome <span class="user">{{ username }}</span>
+                Welcome <span class="user">{{ username.first_name }}</span>
                 <button class="btn btn-lg btn-success" style="margin-top: 0.4%; margin-bottom: 0.4%; margin-left: 40%" name="logout" type="submit">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Profile
                     </button>

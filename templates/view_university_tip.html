@@ -8,7 +8,7 @@
 
     <div id="content">
     <div id="overall_rating">
-         <p>{{ tip_list|length }} people rated this university</p>
+         <p>{{ university.num_tips }} people rated this university</p>
 
         {% for field, rating in rating_list.iteritems() %}
 
