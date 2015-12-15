@@ -163,8 +163,6 @@ def university_tips():
         rating_list['Participation of Students during lectures'] = int(university_info['_difficulty'])
         rating_list['Difficulty of the Exam'] = int(university_info['_participation'])
 
-    print rating_list
-
     response=make_response(render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips', rating_list=rating_list,
                                            university=university_db ))
     if cookie_status():
