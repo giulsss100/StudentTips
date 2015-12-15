@@ -103,16 +103,32 @@ def signup():
 
 @app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
-    """Here we are sure the user has started a search for a course and a professor"""
+
+    if 'submit_tip' in request.form: #WORK IN PROGRESS
+        """The user could have inserted a new tip"""
+
+        course = request.form['input_course'] #hidden
+        professor = request.form['input_professor'] #hidden
+        prof_course = request.form['input_profcourse'] #hidden field (can find it using course and professor
+
+        teaching = request.form['input_teaching']
+        comprehension = request.form['input_comprehension']
+        availability = request.form['input_availability']
+        participation = request.form['input_participation']
+        material = request.form['input_participation']
+        books = request.form['input_books']
+        attending = request.form['input_attending']
+        difficulty = request.form['input_difficulty']
+        time = request.form['input_time']
+        result_rapidity = request.form['input_result_rapidity']
+        note = request.form['input_note']
+
+        db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
+
+
+    """Here we are sure the user has started a search for a course and a professor, or he has inserted a tip and wants to view the refreshed page"""
     course = request.form['input_course']
     professor = request.form['input_professor']
-
-    #1. RESEARCH THE COUPLE (COURSE, PROFESSOR)
-    #2. IF IT EXISTS, GET THE ID OF THE COUPLE
-    #3. SEARCH ALL THE TIPS HAVING THAT ID FOR COURSE, PROFESSOR
-    #4. GET THE LIST OF TIPS AND SAVE IT TO tip_list
-
-    #5. FOR EACH USER MAIL, GET USER
 
     """tip_list: dictionary of tips for the tuple (course, professor)"""
     tip_list = {}
@@ -135,10 +151,10 @@ def course_tips():
 
     medium_rating=tot_avg_rating(rating_list)
 
-
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            medium_rating=medium_rating, rating_list=rating_list,
                                            tip_list=tip_list ))
+
     if cookie_status():
         cookie_setting(response, 'user', cookie_status().email)
     else:

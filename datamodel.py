@@ -98,10 +98,10 @@ class University(Base):
         return "<University ( '%s' , '%d' , '%f' , '%f' , '%f' , '%f' )>" % (self.name, self.num_tips, self._quality, self._availability, self._difficulty, self._participation)
 
     def update_rating (self, tip):
-        self._quality = (self._quality * self.num_tips + tip._teaching)/(self.num_tips+1)
-        self._availability = (self._availability * self.num_tips + tip._availability)/(self.num_tips+1)
-        self._participation = (self._participation * self.num_tips + tip._participation)/(self.num_tips+1)
-        self._difficulty = (self._quality * self.num_tips + tip._difficulty)/(self.num_tips+1)
+        self._quality = (self._quality * self.num_tips + tip['_teaching'])/(self.num_tips+1)
+        self._availability = (self._availability * self.num_tips + tip['_availability'])/(self.num_tips+1)
+        self._participation = (self._participation * self.num_tips + tip['_participation'])/(self.num_tips+1)
+        self._difficulty = (self._quality * self.num_tips + tip['_difficulty'])/(self.num_tips+1)
         self.num_tips+=1
     def get_info (self):
 
@@ -217,7 +217,7 @@ class Tip (Base):
     def update_university_rating(self):
         user = User.query.filter(User.email==self.user_email).first()
         university = University.query.filter(University.name==user.university).first()
-        university.update_rating(self)
+        university.update_rating(self.get_info())
 
 
     def __repr__(self):

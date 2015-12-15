@@ -68,6 +68,24 @@ def insert_user(email, password, first_name, last_name, university, faculty, pho
         session.flush()
         return get_user(email)
 
+#check if user has already posted a tip
+def has_already_tipped(user_email, prof_course):
+    tips = Tip.query.filter(and_(Tip.prof_course == prof_course, Tip.user_email == user_email))
+    for tip in tips:
+        return True
+    return False
+
+#insert new tip
+def insert_tip(user_email, prof_course, _teaching, _comprehension, _availability, _participation, _material, _books, _attending, _difficulty, _time, _result_rapidity, note):
+    if has_already_tipped(user_email, prof_course):
+        return False
+    else:
+        newTip = Tip(user_email, prof_course, _teaching, _comprehension, _availability, _participation, _material, _books, _attending, _difficulty, _time, _result_rapidity, note)
+        session.add(newTip)
+        session.commit()
+        session.flush()
+        return True
+
 #undo changes on the database
 def undo_changes():
     session.rollback()
