@@ -60,8 +60,8 @@ def cookie_setting(response_page, cookie_name, cookie_value):
 def avg_rating(tip_list, field):
     num_tips = len(tip_list)
     tot_stars = 0
-    for tip in tip_list.values():
-        info = tip.get_info()
+    for tip_dict in tip_list.values():
+        info = tip_dict['tip'].get_info()
         tot_stars = tot_stars + info[field]
     return int(tot_stars/num_tips)
 
@@ -168,7 +168,20 @@ def course_tips():
             error = 'No matches found for the couple COURSE: %s - PROFESSOR: %s' % (course, prof)
         else:
             for tip in db_interaction.search_profcourse_tips(input_course, input_professor):
-                tip_list[db_interaction.get_user(tip.user_email)] = tip
+                tip_ratings = {}
+                tip_ratings['Quality of Teaching'] = tip._teaching
+                tip_ratings['Comprehension of Course Objectives'] = tip._comprehension
+                tip_ratings['Professor Availability'] = tip._availability
+                tip_ratings['Participation of Students during lectures'] = tip._participation
+                tip_ratings['Utility of academic Material'] = tip._material
+                tip_ratings['Utility of Textbooks'] = tip._books
+                tip_ratings['Necessity to attend Lectures'] = tip._attending
+                tip_ratings['Difficulty of the Exam'] = tip._difficulty
+                tip_ratings['Time Availability at Exam'] = tip._time
+                tip_ratings['Rapidity in receiving Exam Results'] = tip._result_rapidity
+
+                """for each tip, we create an element containing info about the user, info about the tip itself and its ratings (to iterate on them)"""
+                tip_list[db_interaction.get_user(tip.user_email)] = {'tip': tip, 'ratings': tip_ratings}
 
             if len(tip_list) > 0:
                 rating_list['Quality of Teaching'] = avg_rating(tip_list, '_teaching')

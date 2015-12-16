@@ -71,25 +71,22 @@
                             <h1 id="title"><small class="pull-right">{{ tip_list|length }} tips</small> Tips </h1>
                             <p id="course_prof">Course: {{ course }} - Professor: {{ professor }} </p>
                               </div>
-                        {% for user, tip in tip_list.iteritems() %}
+                        {% for user, tip_dict in tip_list.iteritems() %}
                         <div class="comments-list">
                             <div class="media">
-                                <p class="pull-right"><small> {{ tip.time }} </small></p>
+                                <p class="pull-right"><small> {{ tip_dict['tip'].time }} </small></p>
                                 <a class="media-left" href="#">
                                     <img class="img-responsive" src = "http://lorempixel.com/40/40/people/3/" />
                                    <!-- immagine del profilo : vogliamo metterla??--></a>
                                 <div class="media-body">
-                                    <h4 class="media-heading user_name">{{ user.first_name }}{{ user.last_name }}</h4>
-                                    <p>{{ tip.note }}</p>
-                                    <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip.id }}');">Details</button>
-                                    <div id="tipDetail{{ tip.id }}" style="display:none;">
-                                        <p>Professor Availability: {{ tip._availability }}</p>
-                                        <p> Difficulty of the exam: {{ tip._difficulty }}</p> <p>Participation of Students during lectures: {{ tip._attending }}</p>
-                                        <p>Quality of teaching: {{ tip._teaching }} </p>
-                                        <p>Utility of textbooks: {{ tip._books }} </p><p>Time availability at exam: {{ tip._time }} </p>
-                                        <p>Rapidity in receiving exam results: {{ tip._result_rapidity }} </p><p>Necessity to attend lectures: {{ tip._attending }} </p>
-                                        <p>Comprehension of course objectives: {{ tip._comprehension }} </p><p>Utility of academic material: {{ tip._material }} </p>
-                                        <button id="hideDetail{{ tip.id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip.id }}');">Less Details</button>
+                                    <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
+                                    <p>{{ tip_dict['tip'].note }}</p>
+                                    <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
+                                    <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
+                                        {% for tip_field, tip_rating in tip_dict['ratings'].iteritems() %}
+                                            <p>{{ tip_field }}: {{ tip_rating }}</p>
+                                        {% endfor %}
+                                        <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button>
                                     </div>
                                 </div>
                             </div>
