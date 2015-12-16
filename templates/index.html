@@ -50,7 +50,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
           <img class="first-slide" src="{{ url_for('static',  filename='images/frontpage.png') }}" alt="Front page" style="width: 100%; height: 100%">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Welcome to Studentips.</h1>
+              <h1>Welcome to StudenTips.</h1>
               <p>If you're looking for tutors, tips about your university courses and material, this is the right place.</p>
                 {% if not username %}
                     <p><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a></p>
@@ -161,33 +161,44 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
       <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Tips. <span class="text-muted">Useful suggestions for your course.</span></h2>
+        <div class="col-md-7" style="margin: 0; width: 70%; float:left">
+          <h2 class="featurette-heading" style="margin-top: 0; color: #5CB85C;">Tips. <span class="text-muted">Useful suggestions for your course.</span></h2>
           <p class="lead">Search for your course and your professor. You'll find feedback and tips from someone who has experienced what you're now into.
           You can even find some useful information about the university you're interested in. Everything you need is in the "Tips" section.
           </p>
         </div>
+          <div class="img-container" style="margin: 0; width: 30%; float:right">
+              <img class="img-tip" src="{{ url_for('static',  filename='images/lamp.png') }}" style="position: relative; width: 80%; box-sizing: border-box; float: right;">
+          </div>
+
       </div>
 
       <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Tutors. <span class="text-muted">Help by other students, online or face to face.</span></h2>
+           <div class="img-container" style="margin: 0; width: 30%; float:left; margin-left: 2%">
+              <img class="img-tip" src="{{ url_for('static',  filename='images/people icon.png') }}" style="position: relative; width: 80%; box-sizing: border-box; float: left;">
+          </div>
+        <div class="col-md-7 col-md-push-5" style="position: absolute; margin: 0; width: 65%; padding: 0; padding-left: 0; left: 30%">
+          <h2 class="featurette-heading" style="margin-top: 0; color: #5CB85C; padding-top: 0;">Tutors. <span class="text-muted">Help by other students, online or face to face.</span></h2>
           <p class="lead">If you're stuck with some courses and you need help, in Studentips there are plenty of students
           willing to help you. Book a tutoring lesson and meet with your tutor online, offline, individually or even in groups, depending on
           his/her availability. Visit the "Tutors" section to start your research.</p>
         </div>
+
       </div>
 
       <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Material. <span class="text-muted">If textbooks are not enough.</span></h2>
+        <div class="col-md-7" style="margin: 0; width: 70%; float:left ">
+          <h2 class="featurette-heading" style="margin-top: 0; color: #5CB85C;">Material. <span class="text-muted">If textbooks are not enough.</span></h2>
           <p class="lead">Subscribed students could have uploaded their slides, notes and recordings for the course you need help with.
           Find your course and download what you think you'll need for your exam preparation. You just have to visit the "Material" section.</p>
         </div>
+           <div class="img-container" style="margin: 0; width: 30%; float:right">
+              <img class="img-tip" src="{{ url_for('static',  filename='images/book.png') }}" style="position: relative; width: 80%; box-sizing: border-box; float: right;">
+          </div>
       </div>
 
       <hr class="featurette-divider">
