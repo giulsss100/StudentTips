@@ -205,6 +205,12 @@ def university_tips():
         cookie_setting(response, 'user', False)
     return response
 
+#ho aggiunto i riferimenti per la pagina add tip
+@app.route('/add_tip', methods=['GET', 'POST'])
+def add_tip():
+    response=make_response(render_template('add_tip.html', username=cookie_status(), title='Studentips - Add Tip' ))
+    return response
+
 
 if __name__ == '__main__':
     app.run()
