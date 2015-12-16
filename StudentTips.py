@@ -1,4 +1,3 @@
-from datetime import datetime
 from flask import Flask, render_template, request, make_response
 import db_interaction
 
