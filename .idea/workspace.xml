@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae8ef04a-4fbb-418e-a50f-20d5e3dbab68" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/studentips_db.sqlite" afterPath="$PROJECT_DIR$/studentips_db.sqlite" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StudentTips.py" afterPath="$PROJECT_DIR$/StudentTips.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datamodel.py" afterPath="$PROJECT_DIR$/datamodel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db_interaction.py" afterPath="$PROJECT_DIR$/db_interaction.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/view_course_tips.html" afterPath="$PROJECT_DIR$/templates/view_course_tips.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/view_university_tip.html" afterPath="$PROJECT_DIR$/templates/view_university_tip.html" />
     </list>
     <ignored path="StudentTips.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,10 +28,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="StudentTips.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StudentTips.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StudentTips.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.1439395">
+            <state vertical-scroll-proportion="0.0">
               <caret line="190" column="90" selection-start-line="190" selection-start-column="90" selection-end-line="190" selection-end-column="90" />
               <folding />
             </state>
@@ -53,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view_course_tips.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="view_course_tips.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/view_course_tips.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-66.25">
-              <caret line="106" column="199" selection-start-line="106" selection-start-column="199" selection-end-line="106" selection-end-column="199" />
+            <state vertical-scroll-proportion="3.862903">
+              <caret line="122" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="122" selection-end-column="14" />
               <folding>
                 <element signature="e#1803#1848#0#HTML" expanded="true" />
                 <element signature="e#4210#4231#0#HTML" expanded="true" />
@@ -115,8 +110,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="14" />
-    <option name="y" value="39" />
+    <option name="x" value="10" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="729" />
   </component>
@@ -514,17 +509,23 @@
       <option name="project" value="LOCAL" />
       <updated>1450302901178</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Merge branch 'master' of https://github.com/giulsss100/StudentTips&#10;&#10;# Conflicts:&#10;#&#9;templates/view_course_tips.html&#10;">
+      <created>1450305124377</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1450305124377</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="14" y="39" width="1280" height="729" extended-state="0" />
-    <editor active="true" />
+    <frame x="10" y="23" width="1280" height="729" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0993538" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3343799" sideWeight="0.50646204" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3343799" sideWeight="0.503231" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30455258" sideWeight="0.49353796" order="7" side_tool="false" content_ui="tabs" />
@@ -563,7 +564,8 @@
     <MESSAGE value="aggiunto il dettaglio di ogni tip.&#10;ancora da sistemare il footer" />
     <MESSAGE value="abbozzata la pagina university tip" />
     <MESSAGE value="Modificato il layout dei commenti.&#10;Ripristinato il funzionamento del bottone details" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modificato il layout dei commenti.&#10;Ripristinato il funzionamento del bottone details" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/giulsss100/StudentTips&#10;&#10;# Conflicts:&#10;#&#9;templates/view_course_tips.html&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/giulsss100/StudentTips&#10;&#10;# Conflicts:&#10;#&#9;templates/view_course_tips.html&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -950,22 +952,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/StudentTips.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="190" column="90" selection-start-line="190" selection-start-column="90" selection-end-line="190" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/view_course_tips.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-66.25">
-          <caret line="106" column="199" selection-start-line="106" selection-start-column="199" selection-end-line="106" selection-end-column="199" />
+        <state vertical-scroll-proportion="3.862903">
+          <caret line="122" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="122" selection-end-column="14" />
           <folding>
             <element signature="e#1803#1848#0#HTML" expanded="true" />
             <element signature="e#4210#4231#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StudentTips.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.1439395">
-          <caret line="190" column="90" selection-start-line="190" selection-start-column="90" selection-end-line="190" selection-end-column="90" />
-          <folding />
         </state>
       </provider>
     </entry>
