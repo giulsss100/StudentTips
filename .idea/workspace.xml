@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae8ef04a-4fbb-418e-a50f-20d5e3dbab68" name="Default" comment="immagini su pagina principale">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/book.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/teaching.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/add_tip.html" afterPath="$PROJECT_DIR$/templates/add_tip.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/view_course_tips.html" afterPath="$PROJECT_DIR$/templates/view_course_tips.html" />
@@ -633,7 +635,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450304431610</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="immagini su pagina principale">
+      <created>1450304471845</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1450304471845</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
