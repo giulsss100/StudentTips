@@ -124,7 +124,7 @@ class Professor(Base):
     first_name = Column(String)
     last_name = Column(String)
 
-    def __init__(self, last_name, first_name):
+    def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
 

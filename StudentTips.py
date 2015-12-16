@@ -60,8 +60,8 @@ def cookie_setting(response_page, cookie_name, cookie_value):
 def avg_rating(tip_list, field):
     num_tips = len(tip_list)
     tot_stars = 0
-    for tip in tip_list.values():
-        info = tip.get_info()
+    for tip_dict in tip_list.values():
+        info = tip_dict['tip'].get_info()
         tot_stars = tot_stars + info[field]
     return int(tot_stars/num_tips)
 
@@ -72,6 +72,14 @@ def tot_avg_rating(rating_list):
         tot_rating=tot_rating+value
     return int (tot_rating/len(rating_list))
 
+def redirect_homepage():
+    #redirect to homepage
+    response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
+    if cookie_status():
+        cookie_setting(response, 'user', cookie_status().email)
+    else:
+        cookie_setting(response, 'user', False)
+    return response
 
 @app.route('/',methods=['GET', 'POST'])
 def homepage():
@@ -103,34 +111,95 @@ def signup():
 @app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
 
+    if 'submit_tip' in request.form: #WORK IN PROGRESS
+        """The user could have inserted a new tip"""
+
+        input_course = request.form['input_course'] #hidden
+        input_professor = request.form['input_professor'] #hidden
+        prof_course = request.form['input_profcourse'] #hidden field (can find it using course and professor
+
+        teaching = request.form['input_teaching']
+        comprehension = request.form['input_comprehension']
+        availability = request.form['input_availability']
+        participation = request.form['input_participation']
+        material = request.form['input_participation']
+        books = request.form['input_books']
+        attending = request.form['input_attending']
+        difficulty = request.form['input_difficulty']
+        time = request.form['input_time']
+        result_rapidity = request.form['input_result_rapidity']
+        note = request.form['input_note']
+
+        db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
+
+    """if page accessed from address searchbar"""
+    if not ('input_course' in request.form) and not ('input_professor' in request.form):
+        return redirect_homepage()
+
     """Here we are sure the user has started a search for a course and a professor, or he has inserted a tip and wants to view the refreshed page"""
-    course = request.form['input_course']
-    professor = request.form['input_professor']
+    input_course = request.form['input_course']
+    input_professor = request.form['input_professor']
 
     """tip_list: dictionary of tips for the tuple (course, professor)"""
     tip_list = {}
-    for tip in db_interaction.search_profcourse_tips(course, professor):
-        tip_list[db_interaction.get_user(tip.user_email)] = tip
-
     """rating_list: dictionary of average ratings for the tuple (course, professor)"""
     rating_list = {}
+    """medium_rating: overall rating of the tuple (course, professor)"""
+    medium_rating = ''
 
-    rating_list['Quality of Teaching'] = avg_rating(tip_list, '_teaching')
-    rating_list['Comprehension of Course Objectives'] = avg_rating(tip_list, '_comprehension')
-    rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
-    rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
-    rating_list['Utility of academic Material'] = avg_rating(tip_list, '_material')
-    rating_list['Usefulness of Textbooks'] = avg_rating(tip_list, '_books') #ho cambiato il nome perche' con due nomi uguali (Utility) non funzionavano le stelline
-    rating_list['Necessity to attend Lectures'] = avg_rating(tip_list, '_attending')
-    rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
-    rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
-    rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
+    """We first assume there aren't errors"""
+    error = False
 
-    medium_rating=tot_avg_rating(rating_list)
+    course = db_interaction.search_course(input_course)
+    prof = db_interaction.search_professor(input_professor)
+
+    """check what is the wrong parameter the user passed as input"""
+    if not course and prof:
+        prof = prof.last_name+" "+prof.first_name
+        error = 'Course %s has not been found.' % input_course
+    elif not prof and course:
+        course = course.name
+        error = 'Professor %s has not been found.' % input_professor
+    else:
+        prof = prof.last_name+" "+prof.first_name
+        course = course.name
+
+        if not db_interaction.search_profcourse_tips(input_course, input_professor):
+            error = 'No matches found for the couple COURSE: %s - PROFESSOR: %s' % (course, prof)
+        else:
+            for tip in db_interaction.search_profcourse_tips(input_course, input_professor):
+                tip_ratings = {}
+                tip_ratings['Quality of Teaching'] = tip._teaching
+                tip_ratings['Comprehension of Course Objectives'] = tip._comprehension
+                tip_ratings['Professor Availability'] = tip._availability
+                tip_ratings['Participation of Students during lectures'] = tip._participation
+                tip_ratings['Utility of academic Material'] = tip._material
+                tip_ratings['Utility of Textbooks'] = tip._books
+                tip_ratings['Necessity to attend Lectures'] = tip._attending
+                tip_ratings['Difficulty of the Exam'] = tip._difficulty
+                tip_ratings['Time Availability at Exam'] = tip._time
+                tip_ratings['Rapidity in receiving Exam Results'] = tip._result_rapidity
+
+                """for each tip, we create an element containing info about the user, info about the tip itself and its ratings (to iterate on them)"""
+                tip_list[db_interaction.get_user(tip.user_email)] = {'tip': tip, 'ratings': tip_ratings}
+
+            if len(tip_list) > 0:
+                rating_list['Quality of Teaching'] = avg_rating(tip_list, '_teaching')
+                rating_list['Comprehension of Course Objectives'] = avg_rating(tip_list, '_comprehension')
+                rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
+                rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
+                rating_list['Utility of academic Material'] = avg_rating(tip_list, '_material')
+                rating_list['Utility of Textbooks'] = avg_rating(tip_list, '_books')
+                rating_list['Necessity to attend Lectures'] = avg_rating(tip_list, '_attending')
+                rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
+                rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
+                rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
+
+                medium_rating=tot_avg_rating(rating_list)
 
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            medium_rating=medium_rating, rating_list=rating_list,
-                                           tip_list=tip_list, course=course, professor=professor ))
+                                           tip_list=tip_list, course=course, professor=prof, error=error))
 
     if cookie_status():
         cookie_setting(response, 'user', cookie_status().email)
@@ -140,21 +209,27 @@ def course_tips():
 
 @app.route('/university_tips',methods=['GET', 'POST'])
 def university_tips():
+
+    """if page accessed from address searchbar"""
+    if not ('input_university' in request.form):
+        return redirect_homepage()
+
     """Here we are sure the user has started a search for a university"""
     university = request.form['input_university']
 
     university_db = db_interaction.search_university(university)
-    university_info = university_db.get_info()
-
 
     """rating_list: list of average ratings for the university"""
     rating_list = {}
 
-    if(university_db.num_tips > 0):
-        rating_list['Quality of Teaching'] = int(university_info['_quality'])
-        rating_list['Professor Availability'] = int(university_info['_availability'])
-        rating_list['Participation of Students during lectures'] = int(university_info['_difficulty'])
-        rating_list['Difficulty of the Exam'] = int(university_info['_participation'])
+    if university_db:
+        university_info = university_db.get_info()
+
+        if(university_db.num_tips > 0):
+            rating_list['Quality of Teaching'] = int(university_info['_quality'])
+            rating_list['Professor Availability'] = int(university_info['_availability'])
+            rating_list['Participation of Students during lectures'] = int(university_info['_difficulty'])
+            rating_list['Difficulty of the Exam'] = int(university_info['_participation'])
 
     response=make_response(render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips', rating_list=rating_list,
                                            university=university_db ))
