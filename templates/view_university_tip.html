@@ -7,40 +7,39 @@
     <link href="{{ url_for('static',  filename='css/fixed_rating.css') }}" rel="stylesheet">
 
     <div id="content">
-    <div id="overall_rating">
-         <p>{{ tip_list|length }} people rated this university</p>
+        <div id="overall_rating">
+            {% if university %}
+                     <p>{{ university.num_tips }} people rated this university</p>
 
-        {% for field, rating in rating_list.iteritems() %}
+                    {% for field, rating in rating_list.iteritems() %}
 
-                    <p>{{ field }}</p>
+                                <p>{{ field }}</p>
 
-                    <span class="rating">
+                                <span class="rating">
 
-                    {% for i in [5,4,3,2,1] %}
-                        {% if rating == i  %}
+                                {% for i in [5,4,3,2,1] %}
+                                    {% if rating == i  %}
 
-                            <input type="radio" class="rating-input" disabled="disabled" checked="checked"
-                                   id="rating-input-1-{{i}}" name={{ field }}>
-                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                                        <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                                               id="rating-input-1-{{i}}" name={{ field }}>
+                                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
 
-                        {% else %}
+                                    {% else %}
 
-                            <input type="radio" class="rating-input " disabled="disabled"
-                                   id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
-                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                                        <input type="radio" class="rating-input " disabled="disabled"
+                                               id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
+                                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
 
-                        {% endif %}
+                                    {% endif %}
 
-                    {% endfor %}
+                                {% endfor %}
 
-                    </span>
-
-
-
-    {% endfor %}
-
-
-    </div>
+                                </span>
+                {% endfor %}
+            {% else %}
+                <p>There are no info in our database about the University you searched.</p>
+            {% endif %}
+        </div>
     </div>
 
 

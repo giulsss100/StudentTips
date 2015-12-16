@@ -1,159 +1,105 @@
-<!-- TODO: migliorare lo stile della pagina (colori ecc)-->
-<!-- TODO: perche il footer si è messo li?-->
-<!-- TODO: mettere il dettaglio del tip sotto forma di stelle -->
-<!--  Rating: https://www.everythingfrontend.com/posts/star-rating-input-pure-css.html
-  -->
 {% extends "base_template.html" %}
-<!-- value va da 1 a 5 e mi indica qual è la media per quel campo
- field.value è quindi la valutazione di quel campo. es: field - quality of teaching ,da db ottengo che la media dei voti è 4:
- field.value= 4, quindi saranno "checked" le prime quattro stelline-->
-
 {% block content %}
 
     <script type="text/javascript">
 
         function show(elementId) {
+            document.getElementById(elementId).style.display="block";
+        }
+        function hide(elementId) {
+            document.getElementById(elementId).style.display="none";
+        }
 
-      document.getElementById(elementId).style.display="block";
-    }
-      function hide(elementId) {
+    </script>
 
-      document.getElementById(elementId).style.display="none";
-    }
-
-</script>
-
-<div id="content">
-<div id="overall_rating">
-
-           <p>{{ tip_list|length }} people rated this course</p>
-
-        <!-- qua ricevo il valore medio di tutti i field -->
-
+    <div id="content">
+    {% if not error %}
+        {% if tip_list|length != 0 %}
+            <div id="overall_rating"><!-- qua ricevo il valore medio di tutti i field -->
                 <p class="o_rating">Overall rating
-                <span class="rating">
+                    <span class="rating">
                         {% for i in [5,4,3,2,1] %}
                             {% if medium_rating == i  %}
-
                                 <input type="radio" class="rating-input" disabled="disabled" checked="checked"
                                        id="rating-input-1-{{i}}" name="rating-input-1">
                                 <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
                             {% else %}
-
-                                <input type="radio" class="rating-input " disabled="disabled"
-                                       id="rating-input-1-{{i}}" name="rating-input-1">
+                                <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name="rating-input-1">
                                 <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
                             {% endif %}
-
                         {% endfor %}
-
-                </span></p>
-            <!-- Passo come campi nasconti corso e professore cercati dall'utente che poi saranno utilizzati nel form di aggiunta tip-->
-                 <form class="form-add-tip" id="form_add_tip" action = "{{ url_for('add_tip') }}">
-                    <input type="hidden" name="course" value={{ course }}>
-                     <input type="hidden" name="professor" value={{ professor }}>
-                    <button class="btn btn-lg btn-success" style="margin-top: 0.4%; margin-bottom: 0.4%" name="add_tip" type="submit">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Tip
-                    </button>
-                  </form>
+                    </span>
+                </p>
             </div>
+        {% endif %}
+        <!-- Visualizzo il bottone per l'aggiunta di un nuovo tip solo se l'utente è loggato -->
+        {% if username %}  <!-- Passo come campi nasconti corso e professore cercati dall'utente che poi saranno utilizzati nel form di aggiunta tip-->
 
+            <form class="form-add-tip" id="form_add_tip" action = "{{ url_for('add_tip') }}">
+                <input type="hidden" name="course" value={{ course }}>
+                <input type="hidden" name="professor" value={{ professor }}>
+                <button class="btn btn-lg btn-success" style="margin-top: 0.4%; margin-bottom: 0.4%" name="add_tip" type="submit">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Tip
+                </button>
+            </form>
+        {% endif %}
+        {% if tip_list|length != 0 %}
+                <div id="star">
 
-<div id="star">
-
-    {% for field, rating in rating_list.iteritems() %}
-        <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
-
+                {% for field, rating in rating_list.iteritems() %}
+                    <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
                     <p>{{ field }}</p>
-
                     <span class="rating">
-
-                    {% for i in [5,4,3,2,1] %}
-                        {% if rating == i  %}
-
-                            <input type="radio" class="rating-input" disabled="disabled" checked="checked"
-                                   id="rating-input-1-{{i}}" name={{ field }}>
-                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
-                        {% else %}
-
-                            <input type="radio" class="rating-input " disabled="disabled"
-                                   id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
-                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
-                        {% endif %}
-
-                    {% endfor %}
-
+                        {% for i in [5,4,3,2,1] %}
+                            {% if rating == i  %}
+                                <input type="radio" class="rating-input" disabled="disabled" checked="checked" id="rating-input-1-{{i}}" name={{ field }}>
+                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                            {% else %}
+                                <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
+                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                            {% endif %}
+                        {% endfor %}
                     </span>
 
-
-
-    {% endfor %}
-
-</div>
-
-
-<div id="comments">
-<!-- commments -->
-<!-- http://bootsnipp.com/snippets/featured/comment-posts-layout  -->
-      <h2 class="page-header">Tips</h2>
-
-       {% if tip_list|length != 0 %}
-        <section class="comment-list">
-            {% for tip in tip_list %}
-              <!--Start Comment -->
-              <article class="row">
-                <div class="col-md-2 col-sm-2 hidden-xs">
-                  <figure class="thumbnail">
-                    <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                    <figcaption class="text-center">{{ tip.user_email }}</figcaption> <!-- Oppure possiamo mettere nome e cognome dello user -->
-                  </figure>
+                {% endfor %}
                 </div>
-                <div class="col-md-10 col-sm-10">
-                  <div class="panel panel-default arrow left">
-                    <div class="panel-body">
-                      <header class="text-left">
-                        <div class="comment-user"><i class="fa fa-user"></i> {{ tip.user_email }}</div>
-                        <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ tip.id }}</time>
-                      </header><!-- NB: tip.time deve essere un date time scritto in questo modo! -->
-                      <div class="comment-post">
-                        <p>
-                          {{ tip.note }}
-                        </p>
-                      </div>
-                        <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip }}');">Details</button>
-                        <div id="tipDetail{{ tip }}" style="display:none;"><p>Professor Availability: {{ tip._availability }}</p>
-                           <p> Difficulty of the exam: {{ tip._difficulty }}</p> <p>Participation of Students during lectures: {{ tip._attending }}</p>
-                            <p>Quality of teaching: {{ tip._teaching }} </p>
-                        <p>Utility of textbooks: {{ tip._books }} </p><p>Time availability at exam: {{ tip._time }} </p>
-                        <p>Rapidity in receiving exam results: {{ tip._result_rapidity }} </p><p>Necessity to attend lectures: {{ tip._attending }} </p>
-                        <p>Comprehension of course objectives: {{ tip._comprehension }} </p><p>Utility of academic material: {{ tip._material }} </p>
-                         <button id="hideDetail" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip }}');">Less Details</button>
+
+
+                <div id="comments">
+                    <div class="row">
+                        <div class="page-header">
+                            <h1 id="title"><small class="pull-right">{{ tip_list|length }} tips</small> Tips </h1>
+                            <p id="course_prof">Course: {{ course }} - Professor: {{ professor }} </p>
+                              </div>
+                        {% for user, tip_dict in tip_list.iteritems() %}
+                        <div class="comments-list">
+                            <div class="media">
+                                <p class="pull-right"><small> {{ tip_dict['tip'].time }} </small></p>
+                                <a class="media-left" href="#">
+                                    <img class="img-responsive" src = "http://lorempixel.com/40/40/people/3/" />
+                                   <!-- immagine del profilo : vogliamo metterla??--></a>
+                                <div class="media-body">
+                                    <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
+                                    <p>{{ tip_dict['tip'].note }}</p>
+                                    <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
+                                    <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
+                                        {% for tip_field, tip_rating in tip_dict['ratings'].iteritems() %}
+                                            <p>{{ tip_field }}: {{ tip_rating }}</p>
+                                        {% endfor %}
+                                        <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
-                  </div>
                 </div>
-              </article>
-            {% endfor %}
-
-
-        </section>
-       <!-- Se dalla query ottengo una lista vuota -->
-        {% elif tip_list|length == 0 %}
-
-            <p>No tips for this course have been found</p>
-
+        {% else %}
+            <p>No tips for {{ course }} with professor {{ professor }} have been found.</p>
         {% endif %}
+    {% else %}
+        <p>{{ error }}</p>
+    {% endif %}
     </div>
 
-    </div>
 {% endblock %}
-
-
-{% block footer %}
-<!--TODO: rimettere il footer in fondo alla pagina -->
-{% endblock %}
-
