@@ -38,7 +38,7 @@ def search_profcourse_tips(course, prof):
 def search_university(name):
     universities = University.query.all()
     for university in universities:
-        if(str(name).lower() in str(university.name).lower()):
+        if(str(name).lower() == str(university.name).lower()):
             return university
     return False
 
@@ -89,3 +89,13 @@ def insert_tip(user_email, prof_course, _teaching, _comprehension, _availability
 #undo changes on the database
 def undo_changes():
     session.rollback()
+
+list = Tip.query.all()
+for item in list:
+    print item
+
+list2 = Prof_Course.query.filter(Prof_Course.id == 1).first()
+prof = Professor.query.filter(Professor.id == list2.prof_id).first()
+
+print prof
+print list2.course_name

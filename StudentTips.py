@@ -72,6 +72,14 @@ def tot_avg_rating(rating_list):
         tot_rating=tot_rating+value
     return int (tot_rating/len(rating_list))
 
+def redirect_homepage():
+    #redirect to homepage
+    response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
+    if cookie_status():
+        cookie_setting(response, 'user', cookie_status().email)
+    else:
+        cookie_setting(response, 'user', False)
+    return response
 
 @app.route('/',methods=['GET', 'POST'])
 def homepage():
@@ -124,6 +132,9 @@ def course_tips():
 
         db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
 
+    """if page accessed from address searchbar"""
+    if not ('input_course' in request.form) and not ('input_professor' in request.form):
+        return redirect_homepage()
 
     """Here we are sure the user has started a search for a course and a professor, or he has inserted a tip and wants to view the refreshed page"""
     course = request.form['input_course']
@@ -131,6 +142,8 @@ def course_tips():
 
     """tip_list: dictionary of tips for the tuple (course, professor)"""
     tip_list = {}
+    if not db_interaction.search_profcourse_tips(course, professor):
+        return
     for tip in db_interaction.search_profcourse_tips(course, professor):
         tip_list[db_interaction.get_user(tip.user_email)] = tip
 
@@ -162,21 +175,27 @@ def course_tips():
 
 @app.route('/university_tips',methods=['GET', 'POST'])
 def university_tips():
+
+    """if page accessed from address searchbar"""
+    if not ('input_university' in request.form):
+        return redirect_homepage()
+
     """Here we are sure the user has started a search for a university"""
     university = request.form['input_university']
 
     university_db = db_interaction.search_university(university)
-    university_info = university_db.get_info()
-
 
     """rating_list: list of average ratings for the university"""
     rating_list = {}
 
-    if(university_db.num_tips > 0):
-        rating_list['Quality of Teaching'] = int(university_info['_quality'])
-        rating_list['Professor Availability'] = int(university_info['_availability'])
-        rating_list['Participation of Students during lectures'] = int(university_info['_difficulty'])
-        rating_list['Difficulty of the Exam'] = int(university_info['_participation'])
+    if university_db:
+        university_info = university_db.get_info()
+
+        if(university_db.num_tips > 0):
+            rating_list['Quality of Teaching'] = int(university_info['_quality'])
+            rating_list['Professor Availability'] = int(university_info['_availability'])
+            rating_list['Participation of Students during lectures'] = int(university_info['_difficulty'])
+            rating_list['Difficulty of the Exam'] = int(university_info['_participation'])
 
     response=make_response(render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips', rating_list=rating_list,
                                            university=university_db ))
