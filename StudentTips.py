@@ -104,28 +104,6 @@ def signup():
 @app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
 
-    if 'submit_tip' in request.form: #WORK IN PROGRESS
-        """The user could have inserted a new tip"""
-
-        course = request.form['input_course'] #hidden
-        professor = request.form['input_professor'] #hidden
-        prof_course = request.form['input_profcourse'] #hidden field (can find it using course and professor
-
-        teaching = request.form['input_teaching']
-        comprehension = request.form['input_comprehension']
-        availability = request.form['input_availability']
-        participation = request.form['input_participation']
-        material = request.form['input_participation']
-        books = request.form['input_books']
-        attending = request.form['input_attending']
-        difficulty = request.form['input_difficulty']
-        time = request.form['input_time']
-        result_rapidity = request.form['input_result_rapidity']
-        note = request.form['input_note']
-
-        db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
-
-
     """Here we are sure the user has started a search for a course and a professor, or he has inserted a tip and wants to view the refreshed page"""
     course = request.form['input_course']
     professor = request.form['input_professor']
@@ -143,7 +121,7 @@ def course_tips():
     rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
     rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
     rating_list['Utility of academic Material'] = avg_rating(tip_list, '_material')
-    rating_list['Utility of Textbooks'] = avg_rating(tip_list, '_books')
+    rating_list['Usefulness of Textbooks'] = avg_rating(tip_list, '_books') #ho cambiato il nome perche' con due nomi uguali (Utility) non funzionavano le stelline
     rating_list['Necessity to attend Lectures'] = avg_rating(tip_list, '_attending')
     rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
     rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
@@ -153,7 +131,7 @@ def course_tips():
 
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            medium_rating=medium_rating, rating_list=rating_list,
-                                           tip_list=tip_list ))
+                                           tip_list=tip_list, course=course, professor=professor ))
 
     if cookie_status():
         cookie_setting(response, 'user', cookie_status().email)
@@ -185,6 +163,12 @@ def university_tips():
         cookie_setting(response, 'user', cookie_status().email)
     else:
         cookie_setting(response, 'user', False)
+    return response
+
+#ho aggiunto i riferimenti per la pagina add tip
+@app.route('/add_tip', methods=['GET', 'POST'])
+def add_tip():
+    response=make_response(render_template('add_tip.html', username=cookie_status(), title='Studentips - Add Tip' ))
     return response
 
 
