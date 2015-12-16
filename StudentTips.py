@@ -114,8 +114,8 @@ def course_tips():
     if 'submit_tip' in request.form: #WORK IN PROGRESS
         """The user could have inserted a new tip"""
 
-        course = request.form['input_course'] #hidden
-        professor = request.form['input_professor'] #hidden
+        input_course = request.form['input_course'] #hidden
+        input_professor = request.form['input_professor'] #hidden
         prof_course = request.form['input_profcourse'] #hidden field (can find it using course and professor
 
         teaching = request.form['input_teaching']
@@ -137,35 +137,56 @@ def course_tips():
         return redirect_homepage()
 
     """Here we are sure the user has started a search for a course and a professor, or he has inserted a tip and wants to view the refreshed page"""
-    course = request.form['input_course']
-    professor = request.form['input_professor']
+    input_course = request.form['input_course']
+    input_professor = request.form['input_professor']
 
     """tip_list: dictionary of tips for the tuple (course, professor)"""
     tip_list = {}
-    if not db_interaction.search_profcourse_tips(course, professor):
-        return
-    for tip in db_interaction.search_profcourse_tips(course, professor):
-        tip_list[db_interaction.get_user(tip.user_email)] = tip
-
     """rating_list: dictionary of average ratings for the tuple (course, professor)"""
     rating_list = {}
+    """medium_rating: overall rating of the tuple (course, professor)"""
+    medium_rating = ''
 
-    rating_list['Quality of Teaching'] = avg_rating(tip_list, '_teaching')
-    rating_list['Comprehension of Course Objectives'] = avg_rating(tip_list, '_comprehension')
-    rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
-    rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
-    rating_list['Utility of academic Material'] = avg_rating(tip_list, '_material')
-    rating_list['Utility of Textbooks'] = avg_rating(tip_list, '_books')
-    rating_list['Necessity to attend Lectures'] = avg_rating(tip_list, '_attending')
-    rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
-    rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
-    rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
+    """We first assume there aren't errors"""
+    error = False
 
-    medium_rating=tot_avg_rating(rating_list)
+    course = db_interaction.search_course(input_course)
+    prof = db_interaction.search_professor(input_professor)
+
+    """check what is the wrong parameter the user passed as input"""
+    if not course and prof:
+        prof = prof.last_name+" "+prof.first_name
+        error = 'Course %s has not been found.' % input_course
+    elif not prof and course:
+        course = course.name
+        error = 'Professor %s has not been found.' % input_professor
+    else:
+        prof = prof.last_name+" "+prof.first_name
+        course = course.name
+
+        if not db_interaction.search_profcourse_tips(input_course, input_professor):
+            error = 'No matches found for the couple COURSE: %s - PROFESSOR: %s' % (course, prof)
+        else:
+            for tip in db_interaction.search_profcourse_tips(input_course, input_professor):
+                tip_list[db_interaction.get_user(tip.user_email)] = tip
+
+            if len(tip_list) > 0:
+                rating_list['Quality of Teaching'] = avg_rating(tip_list, '_teaching')
+                rating_list['Comprehension of Course Objectives'] = avg_rating(tip_list, '_comprehension')
+                rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
+                rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
+                rating_list['Utility of academic Material'] = avg_rating(tip_list, '_material')
+                rating_list['Utility of Textbooks'] = avg_rating(tip_list, '_books')
+                rating_list['Necessity to attend Lectures'] = avg_rating(tip_list, '_attending')
+                rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
+                rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
+                rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
+
+                medium_rating=tot_avg_rating(rating_list)
 
     response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                                            medium_rating=medium_rating, rating_list=rating_list,
-                                           tip_list=tip_list ))
+                                           tip_list=tip_list, course=course, professor=prof, error=error))
 
     if cookie_status():
         cookie_setting(response, 'user', cookie_status().email)

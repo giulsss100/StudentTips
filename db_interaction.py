@@ -13,17 +13,26 @@ session = Session()
 def add_tip():
     return True
 
-#search professor by name (or search parameter)
+#search professor by lastname+firstname or firstname+lastname or lastname
 def search_professor(prof):
     professors = Professor.query.all()
     for professor in professors:
-        if(str(prof).lower() in str(professor.first_name + " " + professor.last_name).lower()) or (str(prof).lower() in str(professor.last_name + " " + professor.first_name).lower()):
-            return professor.id
+        if(str(prof).lower() == str(professor.first_name + " " + professor.last_name).lower()) or (str(prof).lower() == str(professor.last_name + " " + professor.first_name).lower()) \
+                or (str(prof).lower() == str(professor.last_name).lower()):
+            return professor
+    return False
+
+#search course by name (or search parameter)
+def search_course(course):
+    courses = Course.query.all()
+    for c in courses:
+        if str((course)).lower() == str(c.name).lower():
+            return c
     return False
 
 #search prof_course
 def search_profcourse_tips(course, prof):
-    id_prof = search_professor(prof)
+    id_prof = search_professor(prof).id
     if(id_prof == False):
         return False
     else:
@@ -89,13 +98,3 @@ def insert_tip(user_email, prof_course, _teaching, _comprehension, _availability
 #undo changes on the database
 def undo_changes():
     session.rollback()
-
-list = Tip.query.all()
-for item in list:
-    print item
-
-list2 = Prof_Course.query.filter(Prof_Course.id == 1).first()
-prof = Professor.query.filter(Professor.id == list2.prof_id).first()
-
-print prof
-print list2.course_name
