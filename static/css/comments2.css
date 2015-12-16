@@ -1,15 +1,25 @@
 .user_name{
-    font-size:14px;
-    font-weight: bold;
+  font-size:14px;
+  font-weight: bold;
+  text-align:left;
+
 }
 .comments-list .media{
     border-bottom: 1px dotted #ccc;
   padding-top:20px;
   padding-bottom: 20px;
 }
+
 /* Layout stelle e commenti */
 /* Overall Rating */
-
+.field{
+  text-align: center;
+  margin-top: 20px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
 #overall_rating{
   padding-top: 6px;
   padding-bottom: 6px;
@@ -20,14 +30,19 @@
   padding: 100px 5px 5px;
   height: 40%;
   width:30%;
-
 }
+
 #comments{
   float:left;
   width:70%;
   padding-left: 30px;
   padding-right: 60px;
 }
+.comments-list{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 p.o_rating{
   font-family: inherit;
   font-weight: 500;
@@ -49,4 +64,8 @@ p.o_rating{
 }
 #title{
   text-align: left;
+}
+.details{
+  text-align:center;
+  cellspacing:5px
 }
