@@ -39,16 +39,14 @@
         <!-- Visualizzo il bottone per l'aggiunta di un nuovo tip solo se l'utente è loggato -->
 
 {% if username %}  <!-- Passo come campi nasconti corso e professore cercati dall'utente che poi saranno utilizzati nel form di aggiunta tip-->
-    <form class="form-add-tip" id="form_add_tip" action = "{{ url_for('add_tip') }}">
-                <input type="hidden" name="course" value={{ course }}>
-                <input type="hidden" name="professor" value={{ professor }}>
-                <button class="btn btn-lg btn-success" style="margin-top: 0.4%; margin-bottom: 0.4%" name="add_tip" type="submit">
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Tip
-                </button>
+    <form class="form-add-tip" id="form_add_tip" action = "{{ url_for('add_tip') }}" method="post" target="_self">
+        <input type="hidden" name="input_course" value="{{ course }}">
+        <input type="hidden" name="input_professor" value="{{ professor }}">
+        <button class="btn btn-lg btn-success" style="margin-top: 0.4%; margin-bottom: 0.4%" type="submit">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Tip
+        </button>
     </form>
 {% endif %}
-
-
 
     {% if tip_list|length != 0 %}
     <div id="star">

@@ -52,6 +52,10 @@ p.o_rating{
   line-height: 1.1;
   color: inherit;
   font-size: 2em;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
 }
 .footer{
   clear:both
@@ -74,6 +78,7 @@ p.o_rating{
 .err{
 
   height: 80%;
+  padding-top:50px;
 
 }
 p.error{
@@ -90,4 +95,18 @@ p.error{
 td, th {
     padding: 8px;
     text-align: center;
+}
+#uni{
+
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  font-size: 2em;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#explain{
+  border-top-color: #2aabd2;
 }
