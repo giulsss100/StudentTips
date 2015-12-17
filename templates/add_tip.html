@@ -1,16 +1,17 @@
-
-<!-- TODO: modificare tasto submit dimensioni sbagliate-->
 <!-- TODO: abbellimento-->
 <!-- TODO: dopo il submit tornare alla pagina di view_tips aggiornata-->
 
 {% extends "base_template.html" %}
 
 {% block content %}
+    <div id="content" style="clear:both; position: relative; margin-top: 10%; width: 100%;" >
      <link href="{{ url_for('static',  filename='css/rating.css') }}" rel="stylesheet">
-    <p>Please rate the course by giving from 1 to 5 stars to each item</p>
+    <p class="o_rating">Add a new Tip</p>
+   <p style="font-weight: bold; font-size: large">Course: <span style="color: #5cb85c;font-weight: bolder">{{ course }}</span> - Professor: <span style="color: #5cb85c; font-weight: bolder">{{ professor }}</span></p>
+    <p style="font-size: large" >Please rate the course by giving from 1 to 5 stars to each item</p>
 
-    <div id="content">
-        <form class="form-signin"  action="{{ url_for('course_tips') }}" target="_self" method="post">
+
+        <form class="adding"  action="{{ url_for('course_tips') }}" target="_self" method="post" style="max-width: 90%; margin-left: 10%">
         <input type="hidden" name="input_course" value="{{ course }}">
         <input type="hidden" name="input_professor" value="{{ professor }}">
        <div class="input-group">
@@ -33,7 +34,32 @@
                         <label for="rating-input-2-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
-                </span></p>
+                </span>
+                <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
+
+                            <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
+                                <table class="details">
+                                {% for tip_field, tip_rating in tip_dict['ratings'].iteritems() %}
+                                    <tr>
+                                        <td class="field">{{ tip_field }}</td>
+                                        <td><span class="rating">
+                                            {% for i in [5,4,3,2,1] %}
+                                                {% if tip_rating == i  %}
+                                                    <input type="radio" class="rating-input" disabled="disabled" checked="checked" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}>
+                                                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                                                {% else %}
+                                                    <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
+                                                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                                                {% endif %}
+                                            {% endfor %}
+                                    </span></td> </tr>
+
+                                {% endfor %}
+                                </table>
+
+                                <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button></p>
+            </p>
+
         </div>
         <div class="input-group">
                 <p class="field"> Is the professor available?
@@ -127,11 +153,9 @@
          <div class="input-group">
 
                 <p class="field">Here you can add all the advice and tips that you think people attending this course should know: </p>
-                <textarea rows="5" cols="50" class="boh" name="input_note">
-
-                </textarea>
+                <textarea rows="5" cols="50" class="boh" name="input_note" style="margin: 0.5%; background-color: #5a5a5a; font-size: large; ">write your comment...</textarea>
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit" name="submit_tip" value="submit_tip" style="margin-top: 3%">Submit</button>
+        <button class="btn btn-lg btn-success btn-block" type="submit" name="submit_tip" value="submit_tip" style="margin-top: 3%; width: 20%; margin-left: 3%">Submit</button>
         </form>
     </div>
 </div>
