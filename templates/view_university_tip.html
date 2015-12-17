@@ -4,40 +4,40 @@
  field.value= 4, quindi saranno "checked" le prime quattro stelline-->
 
 {% block content %}
-    <link href="{{ url_for('static',  filename='css/fixed_rating.css') }}" rel="stylesheet">
-
     <div id="content">
         <div id="overall_rating">
             {% if university %}
-                     <p>{{ university.num_tips }} people rated this university</p>
 
-                    {% for field, rating in rating_list.iteritems() %}
+                <h1 id="uni">{{ university.name }}</h1>
 
-                                <p>{{ field }}</p>
-
-                                <span class="rating">
-
-                                {% for i in [5,4,3,2,1] %}
-                                    {% if rating == i  %}
-
-                                        <input type="radio" class="rating-input" disabled="disabled" checked="checked"
-                                               id="rating-input-1-{{i}}" name={{ field }}>
-                                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
-                                    {% else %}
-
-                                        <input type="radio" class="rating-input " disabled="disabled"
-                                               id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
-                                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
-
-                                    {% endif %}
-
-                                {% endfor %}
-
-                                </span>
+                {% for field, rating in rating_list.iteritems() %}
+                    <p class="field">{{ field }}</p>
+                    <span class="rating">
+                        {% for i in [5,4,3,2,1] %}
+                            {% if rating == i  %}
+                                <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                                       id="rating-input-1-{{i}}" name={{ field }}>
+                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                            {% else %}
+                                <input type="radio" class="rating-input " disabled="disabled"
+                                       id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
+                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
                 {% endfor %}
+                <div id="explain">
+                    <p class="field">{{ university.num_tips }} people rated {{ university.name }}</p>
+                <p class="field">Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla v
+                bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                bla bla bla vbla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                </p>
+                </div>
+
             {% else %}
-                <p>There are no info in our database about the University you searched.</p>
+                <div class="err">
+                <p class="error">There are no info in our database about the University you searched.</p>
+                </div>
             {% endif %}
         </div>
     </div>
