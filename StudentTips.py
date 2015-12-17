@@ -133,7 +133,6 @@ def course_tips():
         note = request.form['input_note']
 
         db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
-        print 'ehi!'
     """tip_list: dictionary of tips for the tuple (course, professor)"""
     tip_list = {}
     """rating_list: dictionary of average ratings for the tuple (course, professor)"""
@@ -154,6 +153,8 @@ def course_tips():
     elif not prof and course:
         course = course.name
         error = 'Professor %s has not been found.' % input_professor
+    elif not prof and not course:
+        error = 'Course: %s and Professor: %s have not been found.' % (input_course, input_professor)
     else:
         prof = prof.last_name+" "+prof.first_name
         course = course.name

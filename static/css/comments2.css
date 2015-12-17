@@ -31,6 +31,9 @@
   height: 40%;
   width:30%;
 }
+#content{
+  padding-top: 30px;
+}
 
 #comments{
   float:left;
@@ -49,6 +52,10 @@ p.o_rating{
   line-height: 1.1;
   color: inherit;
   font-size: 2em;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
 }
 .footer{
   clear:both
@@ -67,5 +74,39 @@ p.o_rating{
 }
 .details{
   text-align:center;
-  cellspacing:5px
+}
+.err{
+
+  height: 80%;
+  padding-top:50px;
+
+}
+p.error{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.1;
+  color: inherit;
+  font-size: 1.5em;
+  text-align:center;
+}
+
+td, th {
+    padding: 8px;
+    text-align: center;
+}
+#uni{
+
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  font-size: 2em;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#explain{
+  border-top-color: #2aabd2;
 }
