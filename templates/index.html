@@ -137,7 +137,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
         <button class="btn btn-lg btn-success btn-block" name="btn_submit" value="search_tutors" type="submit" style="margin-top: 3%">Search</button>
       </form>
 
-        <form class="form-signin index" id="formMaterial">
+        <form class="form-signin index" id="formMaterial" action = "{{ url_for('wip') }}" target="_self" method="post">
         <div class="input-group">
                 <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
                 <label for="inputCourse" class="sr-only">Course</label>
