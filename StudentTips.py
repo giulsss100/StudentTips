@@ -246,5 +246,11 @@ def add_tip():
     return response
 
 
+@app.route('/wip', methods=['GET', 'POST'])
+def wip():
+    response=make_response(render_template('wip.html'))
+    return response
+
+
 if __name__ == '__main__':
     app.run()
