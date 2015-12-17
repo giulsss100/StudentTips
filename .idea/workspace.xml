@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae8ef04a-4fbb-418e-a50f-20d5e3dbab68" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/profile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StudentTips.iws" />
@@ -735,7 +734,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450394025629</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="aggiunta possibile pagina profilo (vuota), se diventa troppo lungo la togliamo!">
+      <created>1450394072094</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1450394072094</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -787,7 +792,8 @@
     <MESSAGE value="nuova pagina wip" />
     <MESSAGE value="prova" />
     <MESSAGE value="migliorato" />
-    <option name="LAST_COMMIT_MESSAGE" value="migliorato" />
+    <MESSAGE value="aggiunta possibile pagina profilo (vuota), se diventa troppo lungo la togliamo!" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunta possibile pagina profilo (vuota), se diventa troppo lungo la togliamo!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1088,11 +1094,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1450394008000" expanded="true" signature="59:65546" placeholder="..." />
-            <marker date="1450394008000" expanded="true" signature="98:194" placeholder="..." />
-            <marker date="1450394008000" expanded="true" signature="192:194" placeholder="..." />
-            <marker date="1450394008000" expanded="true" signature="65489:65520" placeholder="..." />
-            <marker date="1450394008000" expanded="true" signature="65489:65535" placeholder="..." />
+            <marker date="1450394033000" expanded="true" signature="59:65438" placeholder="..." />
+            <marker date="1450394033000" expanded="true" signature="98:194" placeholder="..." />
+            <marker date="1450394033000" expanded="true" signature="192:194" placeholder="..." />
+            <marker date="1450394033000" expanded="true" signature="65381:65412" placeholder="..." />
+            <marker date="1450394033000" expanded="true" signature="65381:65427" placeholder="..." />
           </folding>
         </state>
       </provider>
