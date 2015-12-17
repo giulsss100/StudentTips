@@ -121,7 +121,13 @@
         <div class="err">
         <p class="error">No tips for the course  {{ course }} of {{ professor }} have been found</p>
         <p>Be the first to add a Tip about the course {{ course }} of professor {{ professor }} to help students like you!</p>
-        <p>Click on the "Add Tip" botton and rate this course!</p>
+
+            {% if username %}
+                <p>Click on the "Add Tip" button and rate this course!</p>
+            {% else %}
+                <p>Sign up or Log in to rate this course!</p>
+
+            {% endif %}
         </div>
 
     {% endif %}
