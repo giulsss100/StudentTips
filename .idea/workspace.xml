@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae8ef04a-4fbb-418e-a50f-20d5e3dbab68" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/stud4.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/profile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/StudentTips.iml" afterPath="$PROJECT_DIR$/.idea/StudentTips.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StudentTips.iws" />
@@ -81,7 +78,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stud4.png" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stud4.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/images/stud4.png">
           <provider selected="true" editor-type-id="images">
             <state />
@@ -135,10 +132,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="profile.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.125">
+            <state vertical-scroll-proportion="0.49744898">
               <caret line="13" column="115" selection-start-line="13" selection-start-column="115" selection-end-line="13" selection-end-column="115" />
               <folding>
                 <element signature="e#175#211#0#HTML" expanded="true" />
@@ -732,7 +729,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450393994313</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="migliorato">
+      <created>1450394025629</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1450394025629</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1085,11 +1088,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1450393981000" expanded="true" signature="59:65827" placeholder="..." />
-            <marker date="1450393981000" expanded="true" signature="98:194" placeholder="..." />
-            <marker date="1450393981000" expanded="true" signature="192:194" placeholder="..." />
-            <marker date="1450393981000" expanded="true" signature="65770:65801" placeholder="..." />
-            <marker date="1450393981000" expanded="true" signature="65770:65816" placeholder="..." />
+            <marker date="1450394008000" expanded="true" signature="59:65546" placeholder="..." />
+            <marker date="1450394008000" expanded="true" signature="98:194" placeholder="..." />
+            <marker date="1450394008000" expanded="true" signature="192:194" placeholder="..." />
+            <marker date="1450394008000" expanded="true" signature="65489:65520" placeholder="..." />
+            <marker date="1450394008000" expanded="true" signature="65489:65535" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1172,18 +1175,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.125">
-          <caret line="13" column="115" selection-start-line="13" selection-start-column="115" selection-end-line="13" selection-end-column="115" />
-          <folding>
-            <element signature="e#175#211#0#HTML" expanded="true" />
-            <element signature="e#322#358#0#HTML" expanded="true" />
-            <element signature="e#452#488#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.svg">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1228,6 +1219,18 @@
     <entry file="file://$PROJECT_DIR$/static/images/stud4.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49744898">
+          <caret line="13" column="115" selection-start-line="13" selection-start-column="115" selection-end-line="13" selection-end-column="115" />
+          <folding>
+            <element signature="e#175#211#0#HTML" expanded="true" />
+            <element signature="e#322#358#0#HTML" expanded="true" />
+            <element signature="e#452#488#0#HTML" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
