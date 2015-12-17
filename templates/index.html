@@ -75,8 +75,8 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
             <p style="margin-top: 2%">Here you'll find tips and feedback about your course or the university you're interested in.</p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-           <button id="buttonTutors" type="button" class="btn btn-circle btn-xl" onclick="show('formTutors');selectButton('buttonTutors');">Tutors</button>
-          <p style="margin-top: 2%">Need assistance in preparing your exam? Look if there's a tutor for you.</p>
+                <button id="buttonTutor" type="button" class="btn btn-circle btn-xl" onclick="show('formTutors');selectButton('buttonTutors');">Tutors</button>
+                <p style="margin-top: 2%">Need assistance in preparing your exam? Look if there's a tutor for you.</p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <button id="buttonMaterial" type="button" class="btn btn-circle btn-xl" onclick="show('formMaterial');selectButton('buttonMaterial');">Material</button>
@@ -118,7 +118,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
         <button class="btn btn-lg btn-success btn-block" name="btn_submit" value="search_university" type="submit" style="margin-top: 3%">Search</button>
       </form>
 
-        <form class="form-signin index" id="formTutors">
+        <form class="form-signin index" id="formTutors" action = "{{ url_for('wip') }}" target="_self" method="post">
         <div class="input-group">
                 <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
                 <label for="inputCourse" class="sr-only">Course</label>
@@ -137,7 +137,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
         <button class="btn btn-lg btn-success btn-block" name="btn_submit" value="search_tutors" type="submit" style="margin-top: 3%">Search</button>
       </form>
 
-        <form class="form-signin index" id="formMaterial">
+        <form class="form-signin index" id="formMaterial" action = "{{ url_for('wip') }}" target="_self" method="post">
         <div class="input-group">
                 <span class="form-signin input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
                 <label for="inputCourse" class="sr-only">Course</label>

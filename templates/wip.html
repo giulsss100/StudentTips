@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<div class="container">
+    <hr class="featurette-divider"  style="margin: 0 ;margin-bottom: 2%; margin-top: 3%">
+    <div class="img-container" >
+         <img class="img-tip" src="{{ url_for('static',  filename='images/wip.png') }}">
+    </div>
+
+      <div class="row featurette">
+        <div class="col-md-7" style="position: relative; box-sizing: border-box; width:90%; margin-left: 5%; margin-right: 2%; margin-top:1%; clear:both">
+          <h2 class="featurette-heading" style="margin-top: 0; color: #5CB85C;">Under construction!</h2>
+            <span class="text-muted" style="font-size: 25px"> This page is not ready yet; be patient, we are working to give you the best university experience! Please go back to the home.</span>
+        </div>
+          <a href="{{ url_for('homepage')  }}" target="_self"><button class="btn btn-lg btn-success btn-block" type="submit" style="width: 20%; float: right; margin-right: 4%; clear:both ">Go Back</button></a>
+
+      </div>
+    <hr class="featurette-divider" style="margin: 2% ">
+</div>
+
+{% endblock %}
+
+
