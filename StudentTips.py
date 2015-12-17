@@ -56,6 +56,14 @@ def cookie_setting(response_page, cookie_name, cookie_value):
     else: #unset the cookie
         response_page.set_cookie(cookie_name, '', 0)
 
+"""Manage user cookie"""
+def set_cookie_user(response):
+    if cookie_status():
+        cookie_setting(response, 'user', cookie_status().email)
+    else:
+        cookie_setting(response, 'user', False)
+    return response
+
 """Average rating for a field (tips)"""
 def avg_rating(tip_list, field):
     num_tips = len(tip_list)
@@ -84,53 +92,20 @@ def redirect_homepage():
 @app.route('/',methods=['GET', 'POST'])
 def homepage():
     response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
-    if cookie_status():
-        cookie_setting(response, 'user', cookie_status().email)
-    else:
-        cookie_setting(response, 'user', False)
-    return response
+    return set_cookie_user(response)
 
 @app.route('/login')
 def login():
     response=make_response(render_template('login.html', username=cookie_status(), title='Studentips - Login'))
-    if cookie_status():
-        cookie_setting(response, 'user', cookie_status().email)
-    else:
-        cookie_setting(response, 'user', False)
-    return response
+    return set_cookie_user(response)
 
 @app.route('/signup')
 def signup():
     response=make_response(render_template('signup.html', username=cookie_status(), title='Studentips - Signup'))
-    if cookie_status():
-        cookie_setting(response, 'user', cookie_status().email)
-    else:
-        cookie_setting(response, 'user', False)
-    return response
+    return set_cookie_user(response)
 
 @app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
-
-    if 'submit_tip' in request.form: #WORK IN PROGRESS
-        """The user could have inserted a new tip"""
-
-        input_course = request.form['input_course'] #hidden
-        input_professor = request.form['input_professor'] #hidden
-        prof_course = request.form['input_profcourse'] #hidden field (can find it using course and professor
-
-        teaching = request.form['input_teaching']
-        comprehension = request.form['input_comprehension']
-        availability = request.form['input_availability']
-        participation = request.form['input_participation']
-        material = request.form['input_participation']
-        books = request.form['input_books']
-        attending = request.form['input_attending']
-        difficulty = request.form['input_difficulty']
-        time = request.form['input_time']
-        result_rapidity = request.form['input_result_rapidity']
-        note = request.form['input_note']
-
-        db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
 
     """if page accessed from address searchbar"""
     if not ('input_course' in request.form) and not ('input_professor' in request.form):
@@ -140,6 +115,25 @@ def course_tips():
     input_course = request.form['input_course']
     input_professor = request.form['input_professor']
 
+    if 'submit_tip' in request.form:
+        """The user could have inserted a new tip"""
+
+        prof_course = int(db_interaction.search_profcourse(input_course, input_professor))
+
+        teaching = int(request.form['input_teaching'])
+        comprehension = int(request.form['input_comprehension'])
+        availability = int(request.form['input_availability'])
+        participation = int(request.form['input_participation'])
+        material = int(request.form['input_material'])
+        books = int(request.form['input_books'])
+        attending = int(request.form['input_attending'])
+        difficulty = int(request.form['input_difficulty'])
+        time = int(request.form['input_time'])
+        result_rapidity = int(request.form['input_result_rapidity'])
+        note = request.form['input_note']
+
+        db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
+        print 'ehi!'
     """tip_list: dictionary of tips for the tuple (course, professor)"""
     tip_list = {}
     """rating_list: dictionary of average ratings for the tuple (course, professor)"""
@@ -201,11 +195,7 @@ def course_tips():
                                            medium_rating=medium_rating, rating_list=rating_list,
                                            tip_list=tip_list, course=course, professor=prof, error=error))
 
-    if cookie_status():
-        cookie_setting(response, 'user', cookie_status().email)
-    else:
-        cookie_setting(response, 'user', False)
-    return response
+    return set_cookie_user(response)
 
 @app.route('/university_tips',methods=['GET', 'POST'])
 def university_tips():
@@ -233,17 +223,17 @@ def university_tips():
 
     response=make_response(render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips', rating_list=rating_list,
                                            university=university_db ))
-    if cookie_status():
-        cookie_setting(response, 'user', cookie_status().email)
-    else:
-        cookie_setting(response, 'user', False)
-    return response
+    return set_cookie_user(response)
 
 #ho aggiunto i riferimenti per la pagina add tip
 @app.route('/add_tip', methods=['GET', 'POST'])
 def add_tip():
-    response=make_response(render_template('add_tip.html', username=cookie_status(), title='Studentips - Add Tip' ))
-    return response
+    course = request.form['input_course']
+    professor = request.form['input_professor']
+
+    response=make_response(render_template('add_tip.html', username=cookie_status(), title='Studentips - Add Tip', course=course, professor=professor ))
+
+    return set_cookie_user(response)
 
 
 @app.route('/wip', methods=['GET', 'POST'])

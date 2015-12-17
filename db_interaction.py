@@ -31,6 +31,19 @@ def search_course(course):
     return False
 
 #search prof_course
+def search_profcourse(course, prof):
+    id_prof = search_professor(prof).id
+    if(id_prof == False):
+        return False
+    else:
+        courses_prof = Prof_Course.query.filter(Prof_Course.prof_id == id_prof)
+        for prof_course in courses_prof:
+            if str((prof_course.course_name)).lower() == str(course).lower():
+                id_profcourse = prof_course.id
+                return id_profcourse
+        return False
+
+#search prof_course tips
 def search_profcourse_tips(course, prof):
     id_prof = search_professor(prof).id
     if(id_prof == False):
