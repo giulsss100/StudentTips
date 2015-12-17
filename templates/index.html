@@ -44,16 +44,16 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
 </script>
     <!-- Carousel
     ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img class="first-slide" src="{{ url_for('static',  filename='images/frontpage.png') }}" alt="Front page" style="width: 100%; height: 100%">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 600px">
+      <div class="carousel-inner" role="listbox" style="height: 600px">
+        <div class="item active" style="height: 600px">
+          <img class="first-slide" src="{{ url_for('static',  filename='images/stud4.png') }}" alt="Front page" style="width: 100%; height: 100%">
           <div class="container">
-            <div class="carousel-caption">
-              <h1>Welcome to StudenTips.</h1>
-              <p>If you're looking for tutors, tips about your university courses and material, this is the right place.</p>
+            <div class="carousel-caption" style="bottom:0; text-shadow: 1px 2px 3px #333; padding: 0;">
+              <h1 style="margin-top: 30px; margin-bottom: 0">Welcome to StudenTips.</h1>
+              <p style="margin-bottom: 15px">If you're looking for tutors, tips about your university courses and material, this is the right place.</p>
                 {% if not username %}
-                    <p><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a></p>
+                    <p style="margin-bottom: 15px"><a class="btn btn-lg btn-success" href="{{ url_for('signup') }}" role="button">Sign up today</a></p>
                 {% endif %}
             </div>
           </div>
@@ -219,7 +219,7 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
 
 {% endblock %}
 {% block footer %}
-<footer class="login">
+<footer class="footer" style="margin-left: 2%; margin-right: 2%">
         <p class="pull-right"><a href="#">Back to top</a></p>
         <p>Support at <a href="#">info@studentips.com</a></p>
          <div class="languages">
