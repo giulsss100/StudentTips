@@ -4,7 +4,6 @@
  field.value= 4, quindi saranno "checked" le prime quattro stelline-->
 
 {% block content %}
-    <link href="{{ url_for('static',  filename='css/fixed_rating.css') }}" rel="stylesheet">
 
     <div id="content">
         <div id="overall_rating">
@@ -37,7 +36,9 @@
                                 </span>
                 {% endfor %}
             {% else %}
-                <p>There are no info in our database about the University you searched.</p>
+                <div class="err">
+                <p class="error">There are no info in our database about the University you searched.</p>
+                </div>
             {% endif %}
         </div>
     </div>

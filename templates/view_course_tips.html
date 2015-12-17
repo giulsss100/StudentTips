@@ -4,20 +4,23 @@
     <script type="text/javascript">
 
         function show(elementId) {
-            document.getElementById(elementId).style.display="block";
+            document.getElementById("tipDetail"+elementId).style.display="block";
+            document.getElementById("buttonTips"+elementId).style.display="none";
         }
         function hide(elementId) {
-            document.getElementById(elementId).style.display="none";
+            document.getElementById("tipDetail"+elementId).style.display="none";
+            document.getElementById("buttonTips"+elementId).style.display="block";
         }
 
     </script>
+    {% if not error %}
 
     {% if tip_list|length != 0 %}
 
     <div id="content">
 
     <div id="overall_rating"><!-- qua ricevo il valore medio di tutti i field -->
-        <p class="o_rating">Overall rating
+        <h1 class="o_rating">Overall rating
             <span class="rating">
                 {% for i in [5,4,3,2,1] %}
                     {% if medium_rating == i  %}
@@ -29,21 +32,25 @@
                         <label for="rating-input-1-{{i}}" class="rating-star"></label>
                     {% endif %}
                 {% endfor %}
-            </span></p>
+            </span>
+        </h1>
+        </div>
+    {% endif %}
         <!-- Visualizzo il bottone per l'aggiunta di un nuovo tip solo se l'utente è loggato -->
-        {% if username %}  <!-- Passo come campi nasconti corso e professore cercati dall'utente che poi saranno utilizzati nel form di aggiunta tip-->
 
-            <form class="form-add-tip" id="form_add_tip" action = "{{ url_for('add_tip') }}">
+{% if username %}  <!-- Passo come campi nasconti corso e professore cercati dall'utente che poi saranno utilizzati nel form di aggiunta tip-->
+    <form class="form-add-tip" id="form_add_tip" action = "{{ url_for('add_tip') }}">
                 <input type="hidden" name="course" value={{ course }}>
                 <input type="hidden" name="professor" value={{ professor }}>
                 <button class="btn btn-lg btn-success" style="margin-top: 0.4%; margin-bottom: 0.4%" name="add_tip" type="submit">
                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Tip
                 </button>
-            </form>
-        {% endif %}
-    </div>
+    </form>
+{% endif %}
 
 
+
+    {% if tip_list|length != 0 %}
     <div id="star">
 
     {% for field, rating in rating_list.iteritems() %}
@@ -80,7 +87,7 @@
                     <div class="media-body">
                         <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
                         <p>{{ tip_dict['tip'].note }}</p>
-                        <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
+                        <button id="buttonTips{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="show('{{ tip_dict['tip'].id }}');">Details</button>
 
                         <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
                             <!-- Qua servirebbe un dizionario diverso da quello di prima, con nome del field e voto per ogni tip. Non so se esista già -->
@@ -104,7 +111,7 @@
                             {% endfor %}
                             </table>
 
-                            <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button></p>
+                            <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('{{ tip_dict['tip'].id }}');">Less Details</button></p>
                         </div>
                     </div>
                 </div>
@@ -112,12 +119,18 @@
             {% endfor %}
         </div>
     </div>
+    {% else %}
+        <div class="err">
+        <p class="error">No tips for the course  {{ course }} of {{ professor }} have been found</p>
+        <p>Be the first to add a Tip about the course {{ course }} of professor {{ professor }} to help students like you!</p>
+        <p>Click on the "Add Tip" botton and rate this course!</p>
+        </div>
 
-
-    <!-- Se dalla query ottengo una lista vuota -->
-
-    {% elif tip_list|length == 0 %}
-        <p>No tips for this course have been found</p>
+    {% endif %}
+{% else %}
+        <div class="err">
+        <p class="error">{{ error }}</p>
+        </div>
     {% endif %}
 
 {% endblock %}
