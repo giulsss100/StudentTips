@@ -12,7 +12,7 @@
 
     </script>
 
-    <div id="content">
+    <div id="content"  style="clear:both; position: relative; margin-top: 10%;">
     {% if not error %}
         {% if tip_list|length != 0 %}
             <div id="overall_rating"><!-- qua ricevo il valore medio di tutti i field -->
@@ -44,7 +44,7 @@
             </form>
         {% endif %}
         {% if tip_list|length != 0 %}
-            <div id="star">
+            <div id="star" style="padding:0">
             {% for field, rating in rating_list.iteritems() %}
                 <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
                 <p class="field">{{ field }}</p>
@@ -76,9 +76,9 @@
                         <div class="media-body">
                             <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
                             <p>{{ tip_dict['tip'].note }}</p>
-                            <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
+                            <button id="buttonTips" type="button" class="btn btn-lg btn-success btn-block" onclick="show('tipDetail{{ tip_dict['tip'].id }}');" style="max-width: 20%; padding:0; max-height: 10%; font-size: 15px; margin-left: 43%">Details</button>
 
-                            <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
+                            <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none; margin-top: 2%; margin-bottom: 1%">
                                 <table class="details">
                                 {% for tip_field, tip_rating in tip_dict['ratings'].iteritems() %}
                                     <tr>
@@ -98,7 +98,7 @@
                                 {% endfor %}
                                 </table>
 
-                                <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button></p>
+                                <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-lg btn-success btn-block" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');" style="max-width: 20%; padding:0; max-height: 10%; font-size: 15px;  margin-left: 43%; margin-top: 2%">Less Details</button></p>
                             </div>
                         </div>
                     </div>

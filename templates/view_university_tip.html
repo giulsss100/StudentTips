@@ -6,7 +6,7 @@
 {% block content %}
     <link href="{{ url_for('static',  filename='css/fixed_rating.css') }}" rel="stylesheet">
 
-    <div id="content">
+    <div id="content"  style="clear:both; position: relative; margin-top: 10%;>
         <div id="overall_rating">
             {% if university %}
                      <p>{{ university.num_tips }} people rated this university</p>
