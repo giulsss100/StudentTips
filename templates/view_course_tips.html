@@ -12,24 +12,26 @@
 
     </script>
 
-    {% if tip_list|length != 0 %}
-
     <div id="content">
-
-    <div id="overall_rating"><!-- qua ricevo il valore medio di tutti i field -->
-        <p class="o_rating">Overall rating
-            <span class="rating">
-                {% for i in [5,4,3,2,1] %}
-                    {% if medium_rating == i  %}
-                        <input type="radio" class="rating-input" disabled="disabled" checked="checked"
-                               id="rating-input-1-{{i}}" name="rating-input-1">
-                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                    {% else %}
-                        <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name="rating-input-1">
-                        <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                    {% endif %}
-                {% endfor %}
-            </span></p>
+    {% if not error %}
+        {% if tip_list|length != 0 %}
+            <div id="overall_rating"><!-- qua ricevo il valore medio di tutti i field -->
+                <p class="o_rating">Overall rating
+                    <span class="rating">
+                        {% for i in [5,4,3,2,1] %}
+                            {% if medium_rating == i  %}
+                                <input type="radio" class="rating-input" disabled="disabled" checked="checked"
+                                       id="rating-input-1-{{i}}" name="rating-input-1">
+                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                            {% else %}
+                                <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name="rating-input-1">
+                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                </p>
+            </div>
+            {% endif %}
         <!-- Visualizzo il bottone per l'aggiunta di un nuovo tip solo se l'utente è loggato -->
         {% if username %}  <!-- Passo come campi nasconti corso e professore cercati dall'utente che poi saranno utilizzati nel form di aggiunta tip-->
 
@@ -41,83 +43,74 @@
                 </button>
             </form>
         {% endif %}
-    </div>
-
-
-    <div id="star">
-
-    {% for field, rating in rating_list.iteritems() %}
-        <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
-        <p class="field">{{ field }}</p>
-        <span class="rating">
-            {% for i in [5,4,3,2,1] %}
-                {% if rating == i  %}
-                    <input type="radio" class="rating-input" disabled="disabled" checked="checked" id="rating-input-1-{{i}}" name={{ field }}>
-                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                {% else %}
-                    <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
-                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                {% endif %}
+        {% if tip_list|length != 0 %}
+            <div id="star">
+            {% for field, rating in rating_list.iteritems() %}
+                <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
+                <p class="field">{{ field }}</p>
+                <span class="rating">
+                    {% for i in [5,4,3,2,1] %}
+                        {% if rating == i  %}
+                            <input type="radio" class="rating-input" disabled="disabled" checked="checked" id="rating-input-1-{{i}}" name={{ field }}>
+                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                        {% else %}
+                            <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name={{ field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
+                            <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                        {% endif %}
+                    {% endfor %}
+                </span>
             {% endfor %}
-        </span>
+            </div>
+            <div id="comments">
+                <div class="page-header">
+                    <h1 id="title"><small class="pull-right">{{ tip_list|length }} tips</small> Tips </h1>
+                    <p id="course_prof">Course: {{ course }} - Professor: {{ professor }} </p>
+                </div>
+                {% for user, tip_dict in tip_list.iteritems() %}
+                <div class="comments-list">
+                    <div class="media">
+                        <p class="pull-right"><small> {{ tip_dict['tip'].time }} </small></p>
+                        <a class="media-left" href="#">
+                            <img class="img-responsive" src = "http://lorempixel.com/40/40/people/3/" />
+                           <!-- immagine del profilo : vogliamo metterla??--></a>
+                        <div class="media-body">
+                            <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
+                            <p>{{ tip_dict['tip'].note }}</p>
+                            <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
 
-    {% endfor %}
-    </div>
+                            <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
+                                <table class="details">
+                                {% for tip_field, tip_rating in tip_dict['ratings'].iteritems() %}
+                                    <tr>
+                                        <td class="field">{{ tip_field }}</td>
+                                        <td><span class="rating">
+                                            {% for i in [5,4,3,2,1] %}
+                                                {% if tip_rating == i  %}
+                                                    <input type="radio" class="rating-input" disabled="disabled" checked="checked" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}>
+                                                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                                                {% else %}
+                                                    <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
+                                                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
+                                                {% endif %}
+                                            {% endfor %}
+                                    </span></td> </tr>
 
+                                {% endfor %}
+                                </table>
 
-    <div id="comments">
-            <div class="page-header">
-                <h1 id="title"><small class="pull-right">{{ tip_list|length }} tips</small> Tips </h1>
-                <p id="course_prof">Course: {{ course }} - Professor: {{ professor }} </p>
-                  </div>
-            {% for user, tip_dict in tip_list.iteritems() %}
-            <div class="comments-list">
-                <div class="media">
-                    <p class="pull-right"><small> {{ tip_dict['tip'].time }} </small></p>
-                    <a class="media-left" href="#">
-                        <img class="img-responsive" src = "http://lorempixel.com/40/40/people/3/" />
-                       <!-- immagine del profilo : vogliamo metterla??--></a>
-                    <div class="media-body">
-                        <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
-                        <p>{{ tip_dict['tip'].note }}</p>
-                        <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
-
-                        <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
-                            <!-- Qua servirebbe un dizionario diverso da quello di prima, con nome del field e voto per ogni tip. Non so se esista già -->
-                        <!-- Per ora per farlo funzionare ho messo il dizionario usato nella classe star -->
-                            <table class="details">
-                            {% for tip_field, tip_rating in tip_dict['ratings'].iteritems() %}
-                                <tr>
-                                    <td class="field">{{ tip_field }}</td>
-                                    <td><span class="rating">
-                                        {% for i in [5,4,3,2,1] %}
-                                            {% if tip_rating == i  %}
-                                                <input type="radio" class="rating-input" disabled="disabled" checked="checked" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}>
-                                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                                            {% else %}
-                                                <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
-                                                <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                                            {% endif %}
-                                        {% endfor %}
-                                </span></td> </tr>
-
-                            {% endfor %}
-                            </table>
-
-                            <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button></p>
+                                <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
-        </div>
-    </div>
-
-
-    <!-- Se dalla query ottengo una lista vuota -->
-
-    {% elif tip_list|length == 0 %}
-        <p>No tips for this course have been found</p>
+            </div>
+        {% else %}
+            <p>No tips for {{ course }} with professor {{ professor }} have been found.</p>
+        {% endif %}
+    {% else %}
+        <p>{{ error }}</p>
     {% endif %}
+    </div>
 
 {% endblock %}
