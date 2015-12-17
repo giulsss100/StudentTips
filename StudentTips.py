@@ -174,7 +174,7 @@ def course_tips():
                 tip_ratings['Professor Availability'] = tip._availability
                 tip_ratings['Participation of Students during lectures'] = tip._participation
                 tip_ratings['Utility of academic Material'] = tip._material
-                tip_ratings['Utility of Textbooks'] = tip._books
+                tip_ratings['Usefulness of Textbooks'] = tip._books  #ho dovuto cambiare il nome altrimenti non stampava le stelline colorate
                 tip_ratings['Necessity to attend Lectures'] = tip._attending
                 tip_ratings['Difficulty of the Exam'] = tip._difficulty
                 tip_ratings['Time Availability at Exam'] = tip._time
@@ -189,7 +189,7 @@ def course_tips():
                 rating_list['Professor Availability'] = avg_rating(tip_list, '_availability')
                 rating_list['Participation of Students during lectures'] = avg_rating(tip_list, '_participation')
                 rating_list['Utility of academic Material'] = avg_rating(tip_list, '_material')
-                rating_list['Utility of Textbooks'] = avg_rating(tip_list, '_books')
+                rating_list['Usefulness of Textbooks'] = avg_rating(tip_list, '_books')
                 rating_list['Necessity to attend Lectures'] = avg_rating(tip_list, '_attending')
                 rating_list['Difficulty of the Exam'] = avg_rating(tip_list, '_difficulty')
                 rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
