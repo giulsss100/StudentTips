@@ -10,13 +10,15 @@
     <p>Please rate the course by giving from 1 to 5 stars to each item</p>
 
     <div id="content">
-
+        <form class="form-signin"  action="{{ url_for('course_tips') }}" target="_self" method="post">
+        <input type="hidden" name="input_course" value="{{ course }}">
+        <input type="hidden" name="input_professor" value="{{ professor }}">
        <div class="input-group">
                 <p class="field"> How is the quality of teaching?
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-1-{{ i }}" name="rating-input-1">
+                            id="rating-input-1-{{ i }}" name="input_teaching" value="{{ i }}" required>
                         <label for="rating-input-1-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -27,7 +29,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-2-{{ i }}" name="rating-input-2">
+                            id="rating-input-2-{{ i }}" name="input_comprehension" value="{{ i }}" required>
                         <label for="rating-input-2-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -38,7 +40,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-3-{{ i }}" name="rating-input-3">
+                            id="rating-input-3-{{ i }}" name="input_availability" value="{{ i }}" required>
                         <label for="rating-input-3-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -49,7 +51,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-4-{{ i }}" name="rating-input-4">
+                            id="rating-input-4-{{ i }}" name="input_participation" value="{{ i }}" required>
                         <label for="rating-input-4-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -60,7 +62,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-5-{{ i }}" name="rating-input-5">
+                            id="rating-input-5-{{ i }}" name="input_material" value="{{ i }}" required>
                         <label for="rating-input-5-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -71,7 +73,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-6-{{ i }}" name="rating-input-6">
+                            id="rating-input-6-{{ i }}" name="input_books" value="{{ i }}" required>
                         <label for="rating-input-6-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -82,7 +84,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-7-{{ i }}" name="rating-input-7">
+                            id="rating-input-7-{{ i }}" name="input_attending" value="{{ i }}" required>
                         <label for="rating-input-7-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -93,7 +95,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-8-{{ i }}" name="rating-input-8">
+                            id="rating-input-8-{{ i }}" name="input_difficulty" value="{{ i }}" required>
                         <label for="rating-input-8-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -104,7 +106,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-9-{{ i }}" name="rating-input-9">
+                            id="rating-input-9-{{ i }}" name="input_time" value="{{ i }}" required>
                         <label for="rating-input-9-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -115,7 +117,7 @@
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
                         <input type="radio" class="rating-input "
-                            id="rating-input-10-{{ i }}" name="rating-input-10">
+                            id="rating-input-10-{{ i }}" name="input_result_rapidity" value="{{ i }}" required>
                         <label for="rating-input-10-{{ i }}" class="rating-star"></label>
 
                     {% endfor %}
@@ -125,11 +127,12 @@
          <div class="input-group">
 
                 <p class="field">Here you can add all the advice and tips that you think people attending this course should know: </p>
-                <textarea rows="5" cols="50" class="boh">
+                <textarea rows="5" cols="50" class="boh" name="input_note">
 
                 </textarea>
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 3%">Submit</button>
+        <button class="btn btn-lg btn-success btn-block" type="submit" name="submit_tip" value="submit_tip" style="margin-top: 3%">Submit</button>
+        </form>
     </div>
 </div>
 
