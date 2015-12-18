@@ -4,10 +4,12 @@
     <script type="text/javascript">
 
         function show(elementId) {
-            document.getElementById(elementId).style.display="block";
+             document.getElementById("tipDetail"+elementId).style.display="block";
+             document.getElementById("buttonTips"+elementId).style.display="none";
         }
         function hide(elementId) {
-            document.getElementById(elementId).style.display="none";
+            document.getElementById("tipDetail"+elementId).style.display="none";
+            document.getElementById("buttonTips"+elementId).style.display="block";
         }
 
     </script>
@@ -76,7 +78,7 @@
                         <div class="media-body">
                             <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
                             <p>{{ tip_dict['tip'].note }}</p>
-                            <button id="buttonTips" type="button" class="btn btn-lg btn-success btn-block" onclick="show('tipDetail{{ tip_dict['tip'].id }}');" style="max-width: 20%; padding:0; max-height: 10%; font-size: 15px; margin-left: 43%">Details</button>
+                            <button id="buttonTips{{ tip_dict['tip'].id }}" type="button" class="btn btn-lg btn-success btn-block" onclick="show('{{ tip_dict['tip'].id }}');" style="max-width: 20%; padding:0; max-height: 10%; font-size: 15px; margin-left: 43%">Details</button>
 
                             <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none; margin-top: 2%; margin-bottom: 1%">
                                 <table class="details">
@@ -98,7 +100,7 @@
                                 {% endfor %}
                                 </table>
 
-                                <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-lg btn-success btn-block" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');" style="max-width: 20%; padding:0; max-height: 10%; font-size: 15px;  margin-left: 43%; margin-top: 2%">Less Details</button></p>
+                                <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-lg btn-success btn-block" onclick="hide('{{ tip_dict['tip'].id }}');" style="max-width: 20%; padding:0; max-height: 10%; font-size: 15px;  margin-left: 43%; margin-top: 2%">Less Details</button></p>
                             </div>
                         </div>
                     </div>
@@ -106,7 +108,15 @@
             {% endfor %}
             </div>
         {% else %}
-            <p>No tips for {{ course }} with professor {{ professor }} have been found.</p>
+            <div class="error">
+            <p class="err">No tips for {{ course }} with professor {{ professor }} have been found.</p>
+            <p class="err">Be the first to add a Tip about the course {{ course }} of professor {{ professor }} to help students like you!</p>
+                {% if username %}
+                    <p class="err">Click on the "Add Tip" button and rate this course!</p>
+                {% else %}
+                    <p class="err">Sign up or Log in to rate this course!</p>
+                {% endif %}
+            </div>
         {% endif %}
     {% else %}
         <p>{{ error }}</p>

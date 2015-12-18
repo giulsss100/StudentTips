@@ -7,13 +7,17 @@
     <link href="{{ url_for('static',  filename='css/fixed_rating.css') }}" rel="stylesheet">
 
     <div id="content"  style="clear:both; position: relative; margin-top: 10%;>
-        <div id="overall_rating">
+        <div id=">
+
             {% if university %}
-                     <p>{{ university.num_tips }} people rated this university</p>
+
+            {% if university.num_tips >0 %}
+                <div id="overall_rating">
+                     <p class="field">{{ university.num_tips }} people rated this university</p>
 
                     {% for field, rating in rating_list.iteritems() %}
 
-                                <p>{{ field }}</p>
+                                <p class="field">{{ field }}</p>
 
                                 <span class="rating">
 
@@ -36,10 +40,18 @@
 
                                 </span>
                 {% endfor %}
-            {% else %}
-                <p>There are no info in our database about the University you searched.</p>
+                </div>
+            {% else %} <!-- Non ci sono tip per questa universtità -->
+                <p class="err">There are no tips about a course of this university in our database so we are not able to calculate average ratings for this university  </p>
             {% endif %}
-        </div>
+
+
+            {% else %}
+
+                <p class="err">There are no info in our database about the University you searched.</p>
+
+            {% endif %}
+
     </div>
 
 
