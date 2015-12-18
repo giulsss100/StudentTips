@@ -2,6 +2,7 @@ from datamodel import *
 from sqlalchemy import create_engine, and_, desc
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+
 engine = create_engine ('sqlite:///studentips_db.sqlite')
 Session = scoped_session (sessionmaker (bind=engine))
 

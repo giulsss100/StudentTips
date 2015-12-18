@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response
 import db_interaction
+from collections import OrderedDict
 #TODO: come sono ordinati i tip? mi sembra che a volte me li ordini in maniera diversa
 #TODO: avviso errori nel log in e avviso tip gia inserito
 #TODO: altri possibili errori?
@@ -168,9 +169,9 @@ def course_tips():
 
 
     """tip_list: dictionary of tips for the tuple (course, professor)"""
-    tip_list = {}
+    tip_list = OrderedDict()
     """rating_list: dictionary of average ratings for the tuple (course, professor)"""
-    rating_list = {}
+    rating_list = OrderedDict()
     """medium_rating: overall rating of the tuple (course, professor)"""
     medium_rating = ''
 
