@@ -1,5 +1,5 @@
 from datamodel import *
-from sqlalchemy import create_engine, or_ , and_
+from sqlalchemy import create_engine, and_, desc
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 engine = create_engine ('sqlite:///studentips_db.sqlite')
@@ -53,7 +53,7 @@ def search_profcourse_tips(course, prof):
         for prof_course in courses_prof:
             if str((prof_course.course_name)).lower() == str(course).lower():
                 id_profcourse = prof_course.id
-                tips = Tip.query.filter(Tip.prof_course == id_profcourse)
+                tips = Tip.query.filter(Tip.prof_course == id_profcourse).order_by(desc(Tip.time))
                 return tips
         return False
 

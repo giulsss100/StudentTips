@@ -61,6 +61,16 @@ EVERYTHING WE WANT THE USER TO ACCESS TO IS IN THE STATIC FOLDER (ex. css)
       </div>
     </div><!-- /.carousel -->
 
+    <!-- LOGIN POPUPS -->
+    {% if login_successful == True %}
+        <script type="text/javascript">
+            window.alert('Login successful')
+        </script>
+    {% elif login_successful == False %}
+        <script type="text/javascript">
+            window.alert('Login failed')
+        </script>
+    {% endif %}
 
     <!-- Marketing messaging and featurettes
     ================================================== -->
