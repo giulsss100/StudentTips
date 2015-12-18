@@ -35,30 +35,8 @@
 
                     {% endfor %}
                 </span>
-                <button id="buttonTips" type="button" class="btn btn-default btn-sm" onclick="show('tipDetail{{ tip_dict['tip'].id }}');">Details</button>
 
-                            <div id="tipDetail{{ tip_dict['tip'].id }}" style="display:none;">
-                                <table class="details">
-                                {% for tip_field, tip_rating in tip_dict['ratings'].iteritems() %}
-                                    <tr>
-                                        <td class="field">{{ tip_field }}</td>
-                                        <td><span class="rating">
-                                            {% for i in [5,4,3,2,1] %}
-                                                {% if tip_rating == i  %}
-                                                    <input type="radio" class="rating-input" disabled="disabled" checked="checked" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}>
-                                                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                                                {% else %}
-                                                    <input type="radio" class="rating-input " disabled="disabled" id="rating-input-1-{{i}}" name={{ tip_dict['tip'].id}}{{ tip_field }}> <!-- è importante che gli input abbiano nomi diversi altrimenti non funziona -->
-                                                    <label for="rating-input-1-{{i}}" class="rating-star"></label>
-                                                {% endif %}
-                                            {% endfor %}
-                                    </span></td> </tr>
 
-                                {% endfor %}
-                                </table>
-
-                                <p> <button id="hideDetail{{ tip_dict['tip'].id }}" type="button" class="btn btn-default btn-sm" onclick="hide('tipDetail{{ tip_dict['tip'].id }}');">Less Details</button></p>
-            </p>
 
         </div>
         <div class="input-group">
@@ -153,7 +131,7 @@
          <div class="input-group">
 
                 <p class="field">Here you can add all the advice and tips that you think people attending this course should know: </p>
-                <textarea rows="5" cols="50" class="boh" name="input_note" style="margin: 0.5%; background-color: #5a5a5a; font-size: large; ">write your comment...</textarea>
+                <textarea rows="5" cols="50" class="boh" name="input_note" placeholder="Write your comment..." style="margin: 0.5%; background-color: #5a5a5a; font-size: large; "></textarea>
         </div>
         <button class="btn btn-lg btn-success btn-block" type="submit" name="submit_tip" value="submit_tip" style="margin-top: 3%; width: 20%; margin-left: 3%">Submit</button>
         </form>
