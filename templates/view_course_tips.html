@@ -1,3 +1,5 @@
+<!-- todo: gestire errore login -->
+<!-- todo: gestire errore inserimento di due tip per lo stesso corso -->
 {% extends "base_template.html" %}
 {% block content %}
 
@@ -13,6 +15,7 @@
         }
 
     </script>
+
     {% if not error %}
 
     {% if tip_list|length != 0 %}

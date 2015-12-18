@@ -1,62 +1,75 @@
 from flask import Flask, render_template, request, make_response
 import db_interaction
+#TODO: come sono ordinati i tip? mi sembra che a volte me li ordini in maniera diversa
+#TODO: avviso errori nel log in e avviso tip gia inserito
+#TODO: altri possibili errori?
 
 app = Flask(__name__)
 
 """Login or Signup"""
+
+
 def login_user():
-  if ('input_email' in request.form) and ('input_password' in request.form):
+    if ('input_email' in request.form) and ('input_password' in request.form):
         user_mail = request.form['input_email']
         user_password = request.form['input_password']
 
-        if('input_firstname' in request.form): #user is subscribing
+        if ('input_firstname' in request.form):  # user is subscribing
             firstname = request.form['input_firstname']
             lastname = request.form['input_lastname']
             university = request.form['input_university']
             faculty = ''
-            if('input_faculty' in request.form):
+            if ('input_faculty' in request.form):
                 faculty = request.form['input_faculty']
             phone = ''
-            if('input_phone' in request.form):
+            if ('input_phone' in request.form):
                 phone = request.form['input_phone']
             confirm_password = request.form['input_confirm_password']
-            if not(str(user_password) == str(confirm_password)):
+            if not (str(user_password) == str(confirm_password)):
                 return False
             else:
                 db_interaction.insert_user(user_mail, user_password, firstname, lastname, university, faculty, phone)
 
         user = db_interaction.check_user(user_mail, user_password)
         return user
-  return False
+    return False
 
 
 """Cookie management AND logout: check if cookie exists, or user logged in"""
+
+
 def cookie_status():
-    #if cookie is not set
+    # if cookie is not set
     if request.cookies.get('user') is None:
         return login_user()
 
-    #otherwise cookie is already stored
+    # otherwise cookie is already stored
     user_mail = request.cookies.get('user')
     user = db_interaction.get_user(user_mail)
 
-    #check if the user has logged out
-    if('logout' in request.form):
+    # check if the user has logged out
+    if ('logout' in request.form):
         return False
     else:
         return user
 
+
 """Set the cookie"""
+
+
 def cookie_setting(response_page, cookie_name, cookie_value):
     if cookie_value != False:
         if 'remember_me' in request.form:
-            response_page.set_cookie(cookie_name, cookie_value, 3600*24*365*99)
-        else: #cookie available for just 5 minutes
-            response_page.set_cookie(cookie_name, cookie_value, 60*5)
-    else: #unset the cookie
+            response_page.set_cookie(cookie_name, cookie_value, 3600 * 24 * 365 * 99)
+        else:  # cookie available for just 5 minutes
+            response_page.set_cookie(cookie_name, cookie_value, 60 * 5)
+    else:  # unset the cookie
         response_page.set_cookie(cookie_name, '', 0)
 
+
 """Manage user cookie"""
+
+
 def set_cookie_user(response):
     if cookie_status():
         cookie_setting(response, 'user', cookie_status().email)
@@ -64,45 +77,56 @@ def set_cookie_user(response):
         cookie_setting(response, 'user', False)
     return response
 
+
 """Average rating for a field (tips)"""
+
+
 def avg_rating(tip_list, field):
     num_tips = len(tip_list)
     tot_stars = 0
     for tip_dict in tip_list.values():
         info = tip_dict['tip'].get_info()
         tot_stars = tot_stars + info[field]
-    return int(tot_stars/num_tips)
+    return int(tot_stars / num_tips)
+
 
 """Average rating of all fields"""
+
+
 def tot_avg_rating(rating_list):
-    tot_rating=0
+    tot_rating = 0
     for value in rating_list.values():
-        tot_rating=tot_rating+value
-    return int (tot_rating/len(rating_list))
+        tot_rating = tot_rating + value
+    return int(tot_rating / len(rating_list))
+
 
 def redirect_homepage():
-    #redirect to homepage
-    response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
+    # redirect to homepage
+    response = make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
     if cookie_status():
         cookie_setting(response, 'user', cookie_status().email)
     else:
         cookie_setting(response, 'user', False)
     return response
 
-@app.route('/',methods=['GET', 'POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 def homepage():
-    response=make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
+    response = make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
     return set_cookie_user(response)
+
 
 @app.route('/login')
 def login():
-    response=make_response(render_template('login.html', username=cookie_status(), title='Studentips - Login'))
+    response = make_response(render_template('login.html', username=cookie_status(), title='Studentips - Login'))
     return set_cookie_user(response)
+
 
 @app.route('/signup')
 def signup():
-    response=make_response(render_template('signup.html', username=cookie_status(), title='Studentips - Signup'))
+    response = make_response(render_template('signup.html', username=cookie_status(), title='Studentips - Signup'))
     return set_cookie_user(response)
+
 
 @app.route('/course_tips', methods=['GET', 'POST'])
 def course_tips():
@@ -132,7 +156,11 @@ def course_tips():
         result_rapidity = int(request.form['input_result_rapidity'])
         note = request.form['input_note']
 
-        db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability, participation, material, books, attending, difficulty, time, result_rapidity, note)
+        db_interaction.insert_tip(cookie_status().email, prof_course, teaching, comprehension, availability,
+                                             participation, material, books, attending, difficulty, time,
+                                             result_rapidity, note)
+
+
     """tip_list: dictionary of tips for the tuple (course, professor)"""
     tip_list = {}
     """rating_list: dictionary of average ratings for the tuple (course, professor)"""
@@ -148,7 +176,7 @@ def course_tips():
 
     """check what is the wrong parameter the user passed as input"""
     if not course and prof:
-        prof = prof.last_name+" "+prof.first_name
+        prof = prof.last_name + " " + prof.first_name
         error = 'Course %s has not been found.' % input_course
     elif not prof and course:
         course = course.name
@@ -156,7 +184,7 @@ def course_tips():
     elif not prof and not course:
         error = 'Course: %s and Professor: %s have not been found.' % (input_course, input_professor)
     else:
-        prof = prof.last_name+" "+prof.first_name
+        prof = prof.last_name + " " + prof.first_name
         course = course.name
 
         if not db_interaction.search_profcourse_tips(input_course, input_professor):
@@ -169,7 +197,8 @@ def course_tips():
                 tip_ratings['Professor Availability'] = tip._availability
                 tip_ratings['Participation of Students during lectures'] = tip._participation
                 tip_ratings['Utility of academic Material'] = tip._material
-                tip_ratings['Usefulness of Textbooks'] = tip._books  #ho dovuto cambiare il nome altrimenti non stampava le stelline colorate
+                tip_ratings[
+                    'Usefulness of Textbooks'] = tip._books  # ho dovuto cambiare il nome altrimenti non stampava le stelline colorate
                 tip_ratings['Necessity to attend Lectures'] = tip._attending
                 tip_ratings['Difficulty of the Exam'] = tip._difficulty
                 tip_ratings['Time Availability at Exam'] = tip._time
@@ -190,17 +219,18 @@ def course_tips():
                 rating_list['Time Availability at Exam'] = avg_rating(tip_list, '_time')
                 rating_list['Rapidity in receiving Exam Results'] = avg_rating(tip_list, '_result_rapidity')
 
-                medium_rating=tot_avg_rating(rating_list)
+                medium_rating = tot_avg_rating(rating_list)
 
-    response=make_response(render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
-                                           medium_rating=medium_rating, rating_list=rating_list,
-                                           tip_list=tip_list, course=course, professor=prof, error=error))
+    response = make_response(
+        render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
+                        medium_rating=medium_rating, rating_list=rating_list,
+                        tip_list=tip_list, course=course, professor=prof, error=error))
 
     return set_cookie_user(response)
 
-@app.route('/university_tips',methods=['GET', 'POST'])
-def university_tips():
 
+@app.route('/university_tips', methods=['GET', 'POST'])
+def university_tips():
     """if page accessed from address searchbar"""
     if not ('input_university' in request.form):
         return redirect_homepage()
@@ -216,30 +246,34 @@ def university_tips():
     if university_db:
         university_info = university_db.get_info()
 
-        if(university_db.num_tips > 0):
+        if (university_db.num_tips > 0):
             rating_list['Quality of Teaching'] = int(university_info['_quality'])
             rating_list['Professor Availability'] = int(university_info['_availability'])
             rating_list['Participation of Students during lectures'] = int(university_info['_difficulty'])
             rating_list['Difficulty of the Exam'] = int(university_info['_participation'])
 
-    response=make_response(render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips', rating_list=rating_list,
-                                           university=university_db ))
+    response = make_response(
+        render_template('view_university_tip.html', username=cookie_status(), title='Studentips - University Tips',
+                        rating_list=rating_list,
+                        university=university_db))
     return set_cookie_user(response)
 
-#ho aggiunto i riferimenti per la pagina add tip
+
 @app.route('/add_tip', methods=['GET', 'POST'])
 def add_tip():
     course = request.form['input_course']
     professor = request.form['input_professor']
 
-    response=make_response(render_template('add_tip.html', username=cookie_status(), title='Studentips - Add Tip', course=course, professor=professor ))
+    response = make_response(
+        render_template('add_tip.html', username=cookie_status(), title='Studentips - Add Tip', course=course,
+                        professor=professor))
 
     return set_cookie_user(response)
 
 
 @app.route('/wip', methods=['GET', 'POST'])
 def wip():
-    response=make_response(render_template('wip.html'))
+    response = make_response(render_template('wip.html'))
     return response
 
 
