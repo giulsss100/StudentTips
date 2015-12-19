@@ -1,4 +1,5 @@
 {% extends "base_template.html" %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
 
     <script type="text/javascript">
@@ -45,6 +46,7 @@
                 </button>
             </form>
         {% endif %}
+
         {% if tip_list|length != 0 %}
             <div id="star" style="padding:0">
             {% for field, rating in rating_list.iteritems() %}
@@ -119,7 +121,16 @@
             </div>
         {% endif %}
     {% else %}
-        <p>{{ error }}</p>
+        <div class="error">
+            <p class="err">{{ error }}</p>
+            <div class="suggestion">
+                <p class="contact">The course or the professor that you searched are not in our database yet.</p>
+                <p class="contact">If you think that this course should be rated on our platform please contact </p>
+                <a class="contact" href="mailto:info@studentips.com">info@studentips.com</a>
+
+
+            </div>
+        </div>
     {% endif %}
     </div>
 
