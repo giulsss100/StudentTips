@@ -75,13 +75,14 @@ p.o_rating{
 .details{
   text-align:center;
 }
-.err{
+.error{
 
   height: 80%;
   padding-top:50px;
+  padding-bottom:50px;
 
 }
-p.error{
+p.err{
   padding-top: 15px;
   padding-bottom: 15px;
   font-family: inherit;
