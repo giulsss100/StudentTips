@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response
 import db_interaction
+from collections import OrderedDict
 #TODO: come sono ordinati i tip? mi sembra che a volte me li ordini in maniera diversa
 #TODO: avviso errori nel log in e avviso tip gia inserito
 #TODO: altri possibili errori?
@@ -112,7 +113,13 @@ def redirect_homepage():
 
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
-    response = make_response(render_template('index.html', username=cookie_status(), title='Studentips'))
+    login_successful = ''
+    #check if login was successful
+    if ('input_email' in request.form) and ('input_password' in request.form) and cookie_status():
+        login_successful = True
+    elif ('input_email' in request.form) and ('input_password' in request.form) and not cookie_status():
+        login_successful = False
+    response = make_response(render_template('index.html', username=cookie_status(), title='Studentips', login_successful=login_successful))
     return set_cookie_user(response)
 
 
@@ -162,14 +169,17 @@ def course_tips():
 
 
     """tip_list: dictionary of tips for the tuple (course, professor)"""
-    tip_list = {}
+    tip_list = OrderedDict()
     """rating_list: dictionary of average ratings for the tuple (course, professor)"""
-    rating_list = {}
+    rating_list = OrderedDict()
     """medium_rating: overall rating of the tuple (course, professor)"""
     medium_rating = ''
 
     """We first assume there aren't errors"""
     error = False
+
+    """We first assume we can't tip"""
+    can_tip = False
 
     course = db_interaction.search_course(input_course)
     prof = db_interaction.search_professor(input_professor)
@@ -221,10 +231,15 @@ def course_tips():
 
                 medium_rating = tot_avg_rating(rating_list)
 
+            prof_course_id = db_interaction.search_profcourse(course, prof)
+
+            if cookie_status() and not db_interaction.has_already_tipped(cookie_status().email, prof_course_id):
+                can_tip = True
+
     response = make_response(
         render_template('view_course_tips.html', username=cookie_status(), title='Studentips - Course Tips',
                         medium_rating=medium_rating, rating_list=rating_list,
-                        tip_list=tip_list, course=course, professor=prof, error=error))
+                        tip_list=tip_list, course=course, professor=prof, error=error, can_tip=can_tip))
 
     return set_cookie_user(response)
 
@@ -273,8 +288,8 @@ def add_tip():
 
 @app.route('/wip', methods=['GET', 'POST'])
 def wip():
-    response = make_response(render_template('wip.html'))
-    return response
+    response = make_response(render_template('wip.html', username=cookie_status(), title='Studentips - Work in progress'))
+    return set_cookie_user(response)
 
 
 if __name__ == '__main__':

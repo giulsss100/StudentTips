@@ -21,8 +21,8 @@
   color: inherit;
 }
 #overall_rating{
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 30px;
+  padding-bottom: 50px; /* Sarebbe per non avere il footer a metà pagina ma non è la soluzione migliore*/
 }
 #star{
 

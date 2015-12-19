@@ -13,8 +13,8 @@
 
             {% if university.num_tips >0 %}
                 <div id="overall_rating">
-                     <p class="field">{{ university.num_tips }} people rated this university</p>
 
+                <h1>{{ university.name }}</h1>
                     {% for field, rating in rating_list.iteritems() %}
 
                                 <p class="field">{{ field }}</p>
@@ -40,6 +40,7 @@
 
                                 </span>
                 {% endfor %}
+                 <p class="field">{{ university.num_tips }} people rated this university</p>
                 </div>
             {% else %} <!-- Non ci sono tip per questa universtità -->
                 <p class="err">There are no tips about a course of this university in our database so we are not able to calculate average ratings for this university  </p>
