@@ -18,8 +18,8 @@
     <div id="content"  style="clear:both; position: relative; margin-top: 10%;">
     {% if not error %}
         {% if tip_list|length != 0 %}
-            <div id="overall_rating"><!-- qua ricevo il valore medio di tutti i field -->
-                <p class="o_rating">Overall rating
+            <div id="overall_rating" style="padding-right: 20px"><!-- qua ricevo il valore medio di tutti i field -->
+                <h1 class="o_rating">Overall rating
                     <span class="rating">
                         {% for i in [5,4,3,2,1] %}
                             {% if medium_rating == i  %}
@@ -32,7 +32,10 @@
                             {% endif %}
                         {% endfor %}
                     </span>
-                </p>
+
+
+                </h1>
+
             </div>
             {% endif %}
         <!-- Visualizzo il bottone per l'aggiunta di un nuovo tip solo se l'utente è loggato e non ha inserito tip -->
@@ -48,7 +51,7 @@
         {% endif %}
 
         {% if tip_list|length != 0 %}
-            <div id="star" style="padding:0">
+            <div id="star" style="padding:30px">
             {% for field, rating in rating_list.iteritems() %}
                 <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
                 <p class="field">{{ field }}</p>
@@ -112,11 +115,11 @@
         {% else %}
             <div class="error">
             <p class="err">No tips for {{ course }} with professor {{ professor }} have been found.</p>
-            <p class="err">Be the first to add a Tip about the course {{ course }} of professor {{ professor }} to help students like you!</p>
+            <p class="err" style="color:grey;">Be the first to add a Tip about the course {{ course }} of professor {{ professor }} to help students like you!</p>
                 {% if username %}
                     <p class="err">Click on the "Add Tip" button and rate this course!</p>
                 {% else %}
-                    <p class="err">Sign up or Log in to rate this course!</p>
+                    <p class="err">Sign up or Log in to tip this course!</p>
                 {% endif %}
             </div>
         {% endif %}
@@ -127,8 +130,6 @@
                 <p class="contact">The course or the professor that you searched are not in our database yet.</p>
                 <p class="contact">If you think that this course should be rated on our platform please contact </p>
                 <a class="contact" href="mailto:info@studentips.com">info@studentips.com</a>
-
-
             </div>
         </div>
     {% endif %}

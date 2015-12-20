@@ -40,11 +40,17 @@
 
                                 </span>
                 {% endfor %}
-                 <p class="field">{{ university.num_tips }} people rated this university</p>
+                 <p class="field" style="color:grey">{{ university.num_tips }} people tipped courses of this university</p>
+                <div style="border-top:dashed; border-top-color: #0f0f0f; ">
+                        <p class="contact" style="padding-top: 10px">University ratings are calculated by computing the medium for each field of the scores of all the courses belonging to that university </p>
+                    </div>
                 </div>
             {% else %} <!-- Non ci sono tip per questa universtità -->
                 <div class="error">
-                <p class="err">There are no tips about a course of this university in our database so we are not able to calculate average ratings for this university  </p>
+                <p class="err">There are no tips about a course of this university in our database so we are not able to calculate average ratings for this university</p>
+                    <div class="suggestion">
+                        <p class="contact">University ratings are calculated by computing the medium for each field of the scores of all the courses belonging to that university </p>
+                    </div>
                 </div>
             {% endif %}
 
@@ -53,8 +59,12 @@
                 <div class="error">
 
                 <p class="err">There are no info in our database about the University you searched.</p>
-                </div>
 
+                <div class="suggestion">
+                <p class="contact">If you think that this University should be rated on our platform please contact </p>
+                <a class="contact" href="mailto:info@studentips.com">info@studentips.com</a>
+                </div>
+            </div>
             {% endif %}
 
     </div>

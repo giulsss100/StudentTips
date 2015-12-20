@@ -14,14 +14,14 @@
 /* Overall Rating */
 .field{
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
 }
 #overall_rating{
-  padding-top: 30px;
+  padding-top: 10px;
   padding-bottom: 50px; /* Sarebbe per non avere il footer a metà pagina ma non è la soluzione migliore*/
 }
 #star{
@@ -40,6 +40,7 @@
   width:70%;
   padding-left: 30px;
   padding-right: 60px;
+  padding-bottom: 50px;
 }
 .comments-list{
   padding-left: 10px;

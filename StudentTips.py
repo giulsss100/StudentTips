@@ -88,7 +88,8 @@ def avg_rating(tip_list, field):
     for tip_dict in tip_list.values():
         info = tip_dict['tip'].get_info()
         tot_stars = tot_stars + info[field]
-    return int(tot_stars / num_tips)
+    total= float( tot_stars) /float( num_tips )
+    return int(round(total))
 
 
 """Average rating of all fields"""
@@ -98,7 +99,9 @@ def tot_avg_rating(rating_list):
     tot_rating = 0
     for value in rating_list.values():
         tot_rating = tot_rating + value
-    return int(tot_rating / len(rating_list))
+
+    total= float(float(tot_rating) / float(len(rating_list)))
+    return int(round(total))
 
 
 def redirect_homepage():
