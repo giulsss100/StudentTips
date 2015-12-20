@@ -43,13 +43,17 @@
                  <p class="field">{{ university.num_tips }} people rated this university</p>
                 </div>
             {% else %} <!-- Non ci sono tip per questa universtità -->
+                <div class="error">
                 <p class="err">There are no tips about a course of this university in our database so we are not able to calculate average ratings for this university  </p>
+                </div>
             {% endif %}
 
 
             {% else %}
+                <div class="error">
 
                 <p class="err">There are no info in our database about the University you searched.</p>
+                </div>
 
             {% endif %}
 
