@@ -1,11 +1,10 @@
-<!-- TODO: abbellimento-->
-<!-- TODO: dopo il submit tornare alla pagina di view_tips aggiornata-->
 
 {% extends "base_template.html" %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
-    <div id="content" style="clear:both; position: relative; margin-top: 10%; width: 100%;" >
      <link href="{{ url_for('static',  filename='css/rating.css') }}" rel="stylesheet">
+    <div id="content" style="clear:both; position: relative; margin-top: 10%; width: 100%;" >
+
     <p class="o_rating">Add a new Tip</p>
    <p style="font-weight: bold; font-size: large">Course: <span style="color: #5cb85c;font-weight: bolder">{{ course }}</span> - Professor: <span style="color: #5cb85c; font-weight: bolder">{{ professor }}</span></p>
     <p style="font-size: large" >Please rate the course by giving from 1 to 5 stars to each item</p>
@@ -136,6 +135,6 @@
         <button class="btn btn-lg btn-success btn-block" type="submit" name="submit_tip" value="submit_tip" style="margin-top: 3%; width: 20%; margin-left: 3%">Submit</button>
         </form>
     </div>
-</div>
+
 
 {% endblock %}

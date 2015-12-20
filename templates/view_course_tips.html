@@ -53,7 +53,7 @@
         {% if tip_list|length != 0 %}
             <div id="star" style="padding:30px">
             {% for field, rating in rating_list.iteritems() %}
-                <!-- qua ricevo il field, ad esempio, Quality of teaching e il rating, che è il valore medio-->
+
                 <p class="field">{{ field }}</p>
                 <span class="rating">
                     {% for i in [5,4,3,2,1] %}
@@ -77,7 +77,7 @@
                 <div class="comments-list">
                     <div class="media">
                         <p class="pull-right"><small> {{ tip_dict['tip'].time }} </small></p>
-                        
+
                         <div class="media-body">
                             <h4 class="media-heading user_name">{{ user.first_name }} {{ user.last_name }}</h4>
                             <p>{{ tip_dict['tip'].note }}</p>
