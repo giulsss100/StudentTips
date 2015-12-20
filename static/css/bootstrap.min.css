@@ -31,3 +31,15 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
     padding-bottom: 9px;
     border-bottom: 1px solid #EEE;
 }
+
+.alert-success {
+    color: white;
+    background-color: #5CB85C;
+    border-color: #4CAE4C;
+}
+
+.alert-danger {
+    color: white;
+    background-color: #CC0000;
+    border-color: #CE3018;
+}
